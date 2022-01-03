@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 declare var $: any;
 
 @Component({
@@ -8,8 +9,13 @@ declare var $: any;
 export class NavigationComponent {
   @Output()
   toggleSidebar = new EventEmitter<void>();
-
+  public isLoggin = false;
   public showSearch = false;
 
-  constructor() {}
+  constructor(private auth: AuthService) {
+    this.isLoggin = this.auth.isLogin;
+  }
+  logOut() {
+    this.auth.logout();
+  }
 }

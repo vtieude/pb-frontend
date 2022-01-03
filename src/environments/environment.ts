@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  gateway: 'http://localhost:3000',
+  gateway: 'http://localhost:3000/query',
   callback: 'http://localhost:4200/callback',
   domain: 'test.auth0.com',
   clientId: '<YOUR_AUTH0_APPLICATION_CLIENT_ID>',

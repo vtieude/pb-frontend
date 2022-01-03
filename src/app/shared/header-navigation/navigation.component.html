@@ -18,9 +18,14 @@
 <!-- Right side toggle and nav items -->
 <!-- ============================================================== -->
 <ul class="navbar-nav float-right">
-    <li class="mr-2">
+    <li class="mr-2" *ngIf="!isLoggin">
 		<div class="">
-        	<a routerLink="/todo" class="btn btn-dark text-white ml-3">Login</a>
+        	<a routerLink="/login" class="btn btn-dark text-white ml-3">Login</a>
+		</div>
+    </li>
+    <li class="mr-2" *ngIf="isLoggin">
+		<div class="">
+            <a routerLink="/" (click)="logOut()" class="btn btn-dark text-white ml-3">Logout</a>
 		</div>
     </li>
 </ul>

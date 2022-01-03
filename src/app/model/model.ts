@@ -6,7 +6,7 @@ export class Todo {
     complete: boolean | undefined;
   }
 export class User {
-  id!: number;
+    id!: number;
     username!: string;
     password!: string;
     firstName!: string;
@@ -16,7 +16,17 @@ export class User {
     expires_at!: number;
 }
 
+export interface UserLoginDtoResult {
+  login: {
+    id: number;
+    username: string;
+    token: string;
+    role: string;
+  }
+}
+
+
 export enum Role {
-  User = 'User',
-  Admin = 'Admin'
+  User = 'user',
+  Admin = 'admin'
 }

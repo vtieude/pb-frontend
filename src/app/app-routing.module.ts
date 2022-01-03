@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { LoginComponent } from './authentication/login/login.component';
 import { TodoComponent } from './example/todo/todo.component';
 import { AuthGuard } from './helper/auth.guard';
 
@@ -25,9 +26,14 @@ export const Approutes: Routes = [
     ]
   },
   { path: 'todo', component: FullComponent, canActivate: [AuthGuard],
-    children: [
-      { path: '', component: TodoComponent}
-    ]
+      children: [
+        { path: '', component: TodoComponent}
+      ]
+  },
+  { path: 'login', component: FullComponent,
+  children: [
+    { path: '', component: LoginComponent}
+  ]
   },
   {
     path: '**',

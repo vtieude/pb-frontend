@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -21,7 +20,7 @@ import { NgbdtimepickerBasicComponent } from './timepicker/timepicker.component'
 import { NgbdtypeheadBasicComponent } from './typehead/typehead.component';
 import { ButtonsComponent } from './buttons/buttons.component';
 import { CardsComponent } from './card/card.component';
-import { LoginComponent } from './login/login/login.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
@@ -46,8 +45,7 @@ import { LoginComponent } from './login/login/login.component';
     NgbdtimepickerBasicComponent,
     NgbdtypeheadBasicComponent,
     ButtonsComponent,
-    CardsComponent,
-    LoginComponent
+    CardsComponent
   ]
 })
 export class ComponentsModule {}

@@ -7,7 +7,7 @@ import {
   PathLocationStrategy
 } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -23,15 +23,17 @@ import { BreadcrumbComponent } from './shared/breadcrumb/breadcrumb.component';
 import { Approutes } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SpinnerComponent } from './shared/spinner.component';
-
-import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
-import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
-import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { LoginComponent } from './authentication/login/login.component';
 import { TodoComponent } from './example/todo/todo.component';
 import { AdminComponent } from './admin/admin/admin.component';
 import { ErrorInterceptor } from './helper/error.interceptor';
 import { JwtInterceptor } from './helper/jwt.interceptor';
+import {HttpLink} from 'apollo-angular/http';
+import {InMemoryCache, ApolloLink } from '@apollo/client/core';
+import {APOLLO_OPTIONS} from 'apollo-angular';
+import { PerfectScrollbarConfigInterface, PerfectScrollbarModule, PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
+import { environment } from 'src/environments/environment';
+import { setContext } from '@apollo/client/link/context';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -39,6 +41,41 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   wheelPropagation: true,
   minScrollbarLength: 20
 };
+const urlBE = environment.gateway
+export function createApollo(httpLink: HttpLink) {
+  const basic = setContext((operation, context) => ({
+    headers: {
+      Accept: 'charset=utf-8'
+    }
+  }));
+
+  const auth = setContext((operation, context) => {
+    const currentUser = localStorage.getItem('currentUser');
+    if (!!currentUser) {
+      const user = JSON.parse(currentUser || "");
+      console.log(user)
+      if (!!user && !!user.token) {
+        return {
+          headers: {
+            Authorization: `Bearer ${user.token}`
+          }
+        };
+      } else {
+        return {};
+      }
+    }
+    return {};
+    
+  });
+  const link = ApolloLink.from([basic, auth, httpLink.create({ uri: urlBE })]);
+  const cache = new InMemoryCache();
+
+  return {
+    link,
+    cache
+  }
+}
+
 
 @NgModule({
   declarations: [
@@ -60,6 +97,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     HttpClientModule,
     PerfectScrollbarModule,
     NgbModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(Approutes, { useHash: false, relativeLinkResolution: 'legacy' })
   ],
   providers: [
@@ -73,7 +111,13 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    {
+      provide: APOLLO_OPTIONS,
+      useFactory: createApollo,
+      deps: [HttpLink,HttpClient],
+    },
   ],
+
   bootstrap: [AppComponent]
 })
 export class AppModule {}
