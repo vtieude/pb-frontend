@@ -3,10 +3,11 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { User, UserLoginDtoResult } from '../model/model';
+import { loginVariablesInput, User } from '../model/model';
 import { Apollo, gql, QueryRef } from 'apollo-angular';
 import { variable } from '@angular/compiler/src/output/output_ast';
 import { Router } from '@angular/router';
+import { login } from './__generated__/login';
 @Injectable({
   providedIn: 'root'
 })
@@ -14,7 +15,6 @@ import { Router } from '@angular/router';
 export class AuthService {
   private usersQuery: QueryRef<{users: User}, { }>
   private currentUserSubject: BehaviorSubject<User>;
-  public currentUser: Observable<User>;
   public isLogin: boolean = false;
   constructor(private http: HttpClient, private apollo: Apollo, private router: Router)  {
     this.usersQuery = this.apollo.watchQuery({
@@ -24,15 +24,18 @@ export class AuthService {
         }
       }`
     });
-    const localUser = localStorage.getItem('currentUser') || '';
     const testUser = new User();
     this.currentUserSubject = new BehaviorSubject<User>(testUser);
     // this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localUser));
-    this.currentUser = this.currentUserSubject.asObservable();
+    // this.currentUser = this.currentUserSubject.asObservable();
 
   }
   public get currentUserValue(): User {
     return this.currentUserSubject.value;
+}
+
+setCurrentUserLogin(userLogin: User) {
+  this.currentUserSubject.next(userLogin);
 }
 
  login(username: string, password: string)  {
@@ -46,12 +49,10 @@ export class AuthService {
     }
   }
 `;
-  return this.apollo.mutate<UserLoginDtoResult>({
+ let inputLogin = new loginVariablesInput(username, password);
+  return this.apollo.mutate<login>({
     mutation: loginMutation,
-    variables: {
-      email: username,
-      password: password
-    }
+    variables: inputLogin
   });
 }
 
@@ -70,8 +71,7 @@ isAuthenticated(): boolean {
 
 logout(): void {
   // remove user from local storage to log user out
-  localStorage.removeItem('currentUser');
-  localStorage.removeItem('token');
+  localStorage.clear();
   // tslint:disable-next-line: prefer-const
   let nullUser!: User ;
   this.apollo.getClient().resetStore();

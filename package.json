@@ -9,7 +9,9 @@
     "heroku-postbuild": "ng build --configuration=production",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "download-schema": "apollo schema:download --endpoint=http://localhost:3000/query graphql-schema.json",
+    "codegen": "npm run download-schema && apollo codegen:generate --localSchemaFile=graphql-schema.json --target=typescript --tagName=gql"
   },
   "private": true,
   "dependencies": {
@@ -41,15 +43,17 @@
     "sass": "^1.29.0",
     "tslib": "^2.0.0",
     "typescript": "4.2.4",
-    "zone.js": "~0.11.4",
-    "uglify-es": "3.2.2"
+    "uglify-es": "3.2.2",
+    "zone.js": "~0.11.4"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~12.0.2",
     "@angular/language-service": "^12.0.2",
+    "@types/graphql": "^14.5.0",
     "@types/jasmine": "~3.6.0",
     "@types/jasminewd2": "^2.0.6",
     "@types/node": "^12.11.1",
+    "apollo": "^2.33.9",
     "codelyzer": "^6.0.0",
     "enhanced-resolve": "^3.3.0",
     "jasmine-core": "~3.6.0",
@@ -67,5 +71,9 @@
   "engine": {
     "node": "14.15.5",
     "npm": "6.14.11"
+  },
+  "resolutions": {
+    "graphql": "14.5.0",
+    "**/graphql": "^14.5.0"
   }
 }

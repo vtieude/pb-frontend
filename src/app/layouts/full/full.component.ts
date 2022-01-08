@@ -2,6 +2,7 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+import { AuthService } from 'src/app/services/auth.service';
 //declare var $: any;
 
 @Component({
@@ -13,13 +14,16 @@ export class FullComponent implements OnInit {
 
 	public config: PerfectScrollbarConfigInterface = {};
 
-  constructor(public router: Router) {}
+  constructor(public router: Router,private authService: AuthService) {
+    this.userName = authService.currentUserValue?.userName;
+  }
 
   public innerWidth=0;
   public defaultSidebar='';
   public showMobileMenu = false;
   public expandLogo = false;
   public sidebartype = 'full';
+  public userName = "";
 
   Logo() {
     this.expandLogo = !this.expandLogo;

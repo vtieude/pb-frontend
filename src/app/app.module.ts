@@ -50,19 +50,15 @@ export function createApollo(httpLink: HttpLink) {
   }));
 
   const auth = setContext((operation, context) => {
-    const currentUser = localStorage.getItem('currentUser');
-    if (!!currentUser) {
-      const user = JSON.parse(currentUser || "");
-      console.log(user)
-      if (!!user && !!user.token) {
-        return {
-          headers: {
-            Authorization: `Bearer ${user.token}`
-          }
-        };
+    const token = localStorage.getItem('token');
+    if (!!token) {
+      return {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
       } else {
         return {};
-      }
     }
     return {};
     

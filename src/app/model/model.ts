@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { loginVariables } from '../services/__generated__/login';
 @Injectable()
 export class Todo {
     id: string | undefined;
@@ -7,24 +8,22 @@ export class Todo {
   }
 export class User {
     id!: number;
-    username!: string;
+    userName!: string;
     password!: string;
     firstName!: string;
     lastName!: string;
     token?: string;
-    role: Role | undefined;
+    role: string | undefined;
     expires_at!: number;
 }
-
-export interface UserLoginDtoResult {
-  login: {
-    id: number;
-    username: string;
-    token: string;
-    role: string;
-  }
+export class loginVariablesInput implements loginVariables {
+  email!: string;
+  password!: string;
+  constructor(email: string, password: string) {
+    this.email = email;
+    this.password = password;
 }
-
+}
 
 export enum Role {
   User = 'user',

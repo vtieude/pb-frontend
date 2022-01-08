@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
+import { User } from 'src/app/model/model';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -36,10 +37,16 @@ export class LoginComponent implements OnInit {
       if (this.loginForm.invalid) {
           return;
       }
+      this.error = "";
       this.loading = true;
        this.authenticationService.login(this.f.username.value, this.f.password.value)
        .subscribe(({data}) => {
-        localStorage.setItem('currentUser', JSON.stringify({ username: data?.login?.username, role: data?.login?.role, token: data?.login.token }));
+        localStorage.setItem('token', data?.login?.token || "");
+        let userLogin = new User();
+        userLogin.userName = data?.login?.userName || "";
+        userLogin.role = data?.login?.role || "";
+        userLogin.token = data?.login?.token;
+        this.authenticationService.setCurrentUserLogin(userLogin)
         this.authenticationService.isLogin = true;
         this.router.navigate(['/dashboard']);
        }, (error) => {
