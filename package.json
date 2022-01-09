@@ -4,6 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "node server.js",
+    "startLocal": "ng serve",
     "build": "ng build --prod",
     "postinstall": "ng build --aot --prod",
     "heroku-postbuild": "ng build --configuration=production",
@@ -35,6 +36,7 @@
     "graphql": "^15.8.0",
     "ng2-charts": "^2.4.2",
     "ngx-perfect-scrollbar": "6.1.0",
+    "ngx-toastr": "^14.2.1",
     "nvm": "0.0.4",
     "pace-js": "^1.0.2",
     "path": "^0.12.7",

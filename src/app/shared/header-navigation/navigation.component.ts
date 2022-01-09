@@ -13,7 +13,8 @@ export class NavigationComponent {
   public showSearch = false;
 
   constructor(private auth: AuthService) {
-    this.auth.isLogin.subscribe(data => {
+    this.isLoggin = this.auth.isUserLogin;
+    this.auth.isLoginSubject.subscribe(data => {
       this.isLoggin = data;
     });
   }

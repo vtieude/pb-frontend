@@ -16,7 +16,8 @@ import { getMe } from './__generated__/getMe';
 export class AuthService {
   private usersQuery: QueryRef<{users: User}, { }>
   public currentUserSubject: BehaviorSubject<User>;
-  public isLogin = new Subject<boolean>();
+  public isLoginSubject = new Subject<boolean>();
+  public isUserLogin = false;
   private currentUser: User;
   constructor(private http: HttpClient, private apollo: Apollo, private router: Router)  {
     this.usersQuery = this.apollo.watchQuery({
@@ -35,7 +36,8 @@ export class AuthService {
 }
 
 setUserLogin() {
-  this.isLogin.next(true);
+  this.isUserLogin = true;
+  this.isLoginSubject.next(this.isUserLogin);
 }
 
 updateUserLoginInformation(updatedUser: User) {
@@ -93,10 +95,17 @@ async getAllUsers(): Promise<User> {
 }
 
 isAuthenticated(): boolean {
-  if (this.currentUserValue.expires_at <= 0 || !this.currentUserValue.expires_at) {
+  if (this.isUserLogin) {
+    return this.currentUser.id > 0;
+  }
+  const token = localStorage.getItem('token');
+  if (!token) {
+    return false;
+  }
+  if (isNaN(this.currentUser.id) || this.currentUser.id === 0) {
     return true;
   }
-  return new Date().getTime() < this.currentUserValue.expires_at;
+  return false;
 }
 
 
@@ -106,7 +115,8 @@ logout(): void {
   // tslint:disable-next-line: prefer-const
   let nullUser!: User ;
   this.apollo.getClient().resetStore();
-  this.isLogin.next(false);
+  this.isUserLogin = false;
+  this.isLoginSubject.next(this.isUserLogin);
   this.router.navigate(['/login']);
   this.currentUserSubject.next(nullUser);
 }

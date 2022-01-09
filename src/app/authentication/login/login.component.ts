@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { first } from 'rxjs/operators';
+import { Router } from '@angular/router';
 import { User } from 'src/app/model/model';
 import { AuthService } from 'src/app/services/auth.service';
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -46,6 +44,7 @@ export class LoginComponent implements OnInit {
         userLogin.userName = data?.login?.userName || "";
         userLogin.role = data?.login?.role || "";
         userLogin.token = data?.login?.token;
+        userLogin.id = data?.login?.id || 0;
         this.authenticationService.updateUserLoginInformation(userLogin)
         this.authenticationService.setUserLogin();
         this.router.navigate(['/dashboard']);

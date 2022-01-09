@@ -24,7 +24,6 @@ import { Approutes } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SpinnerComponent } from './shared/spinner.component';
 import { LoginComponent } from './authentication/login/login.component';
-import { TodoComponent } from './example/todo/todo.component';
 import { AdminComponent } from './admin/admin/admin.component';
 import { ErrorInterceptor } from './helper/error.interceptor';
 import { JwtInterceptor } from './helper/jwt.interceptor';
@@ -34,6 +33,7 @@ import {APOLLO_OPTIONS} from 'apollo-angular';
 import { PerfectScrollbarConfigInterface, PerfectScrollbarModule, PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { environment } from 'src/environments/environment';
 import { setContext } from '@apollo/client/link/context';
+import { ToastrModule } from 'ngx-toastr';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -82,7 +82,6 @@ export function createApollo(httpLink: HttpLink) {
     SidebarComponent,
     BreadcrumbComponent,
     LoginComponent,
-    TodoComponent,
     AdminComponent
   ],
   imports: [
@@ -94,6 +93,7 @@ export function createApollo(httpLink: HttpLink) {
     PerfectScrollbarModule,
     NgbModule,
     ReactiveFormsModule,
+    ToastrModule.forRoot(),
     RouterModule.forRoot(Approutes, { useHash: false, relativeLinkResolution: 'legacy' })
   ],
   providers: [
