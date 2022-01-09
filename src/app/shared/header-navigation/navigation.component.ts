@@ -13,7 +13,9 @@ export class NavigationComponent {
   public showSearch = false;
 
   constructor(private auth: AuthService) {
-    this.isLoggin = this.auth.isLogin;
+    this.auth.isLogin.subscribe(data => {
+      this.isLoggin = data;
+    });
   }
   logOut() {
     this.auth.logout();

@@ -46,17 +46,19 @@ export class LoginComponent implements OnInit {
         userLogin.userName = data?.login?.userName || "";
         userLogin.role = data?.login?.role || "";
         userLogin.token = data?.login?.token;
-        this.authenticationService.setCurrentUserLogin(userLogin)
-        this.authenticationService.isLogin = true;
+        this.authenticationService.updateUserLoginInformation(userLogin)
+        this.authenticationService.setUserLogin();
         this.router.navigate(['/dashboard']);
+        this.loading = false;
+
        }, (error) => {
         this.error = error;
+        this.loading = false;
         ;
        });
     //  this.authenticationService.getAllUsers().then((response) => {
     //    this.loading = true
     //  }, (reponseError) => {
     //  });
-      this.loading = false;
   }
 }

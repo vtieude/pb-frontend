@@ -16,6 +16,9 @@ export class FullComponent implements OnInit {
 
   constructor(public router: Router,private authService: AuthService) {
     this.userName = authService.currentUserValue?.userName;
+    this.authService.currentUserSubject.subscribe(userLoggin => {
+      this.userName = authService.currentUserValue?.userName;
+    })
   }
 
   public innerWidth=0;

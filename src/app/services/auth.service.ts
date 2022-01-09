@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { loginVariablesInput, User } from '../model/model';
@@ -8,14 +8,16 @@ import { Apollo, gql, QueryRef } from 'apollo-angular';
 import { variable } from '@angular/compiler/src/output/output_ast';
 import { Router } from '@angular/router';
 import { login } from './__generated__/login';
+import { getMe } from './__generated__/getMe';
 @Injectable({
   providedIn: 'root'
 })
 
 export class AuthService {
   private usersQuery: QueryRef<{users: User}, { }>
-  private currentUserSubject: BehaviorSubject<User>;
-  public isLogin: boolean = false;
+  public currentUserSubject: BehaviorSubject<User>;
+  public isLogin = new Subject<boolean>();
+  private currentUser: User;
   constructor(private http: HttpClient, private apollo: Apollo, private router: Router)  {
     this.usersQuery = this.apollo.watchQuery({
       query: gql`query characters {
@@ -24,18 +26,47 @@ export class AuthService {
         }
       }`
     });
-    const testUser = new User();
-    this.currentUserSubject = new BehaviorSubject<User>(testUser);
-    // this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localUser));
-    // this.currentUser = this.currentUserSubject.asObservable();
-
+    this.currentUser = new User();
+    this.currentUserSubject = new BehaviorSubject<User>(this.currentUser);
+    this.me();
   }
   public get currentUserValue(): User {
     return this.currentUserSubject.value;
 }
 
-setCurrentUserLogin(userLogin: User) {
-  this.currentUserSubject.next(userLogin);
+setUserLogin() {
+  this.isLogin.next(true);
+}
+
+updateUserLoginInformation(updatedUser: User) {
+  this.currentUser = updatedUser;
+  this.nextCurrentUserLogin();
+}
+
+nextCurrentUserLogin() {
+  this.currentUserSubject.next(this.currentUser);
+}
+
+me() {
+  const token = localStorage.getItem('token');
+  const query = gql`query getMe {
+    Me {
+      id
+      role
+      userName
+    }
+  }`;
+  if (!!token && !(this.currentUser.id > 0)) {
+    this.apollo.watchQuery<getMe>({
+      query: query
+    }).valueChanges.subscribe(({data}) => {
+      this.currentUser.userName = data.Me?.userName;
+      this.currentUser.id = data.Me?.id;
+      this.currentUser.role = data.Me?.role;
+      this.nextCurrentUserLogin()
+      this.setUserLogin();
+    });
+  } 
 }
 
  login(username: string, password: string)  {
@@ -75,7 +106,7 @@ logout(): void {
   // tslint:disable-next-line: prefer-const
   let nullUser!: User ;
   this.apollo.getClient().resetStore();
-  this.isLogin = false;
+  this.isLogin.next(false);
   this.router.navigate(['/login']);
   this.currentUserSubject.next(nullUser);
 }
