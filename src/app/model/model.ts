@@ -27,5 +27,7 @@ export class loginVariablesInput implements loginVariables {
 
 export enum Role {
   User = 'user',
-  Admin = 'admin'
+  Admin = 'admin',
+  Staff = 'staff',
+  SuperAdmin = "spuper_admin"
 }

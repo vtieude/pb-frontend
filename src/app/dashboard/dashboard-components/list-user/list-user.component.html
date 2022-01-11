@@ -1,0 +1,54 @@
+<div class="card">
+    <div class="card-body">
+      <div class="d-md-flex align-items-center">
+        <div>
+          <h4 class="card-title">
+            Danh sách nhân viên
+          </h4>
+          <h6 class="card-subtitle">Sales of {{currentYear}}</h6>
+        </div>
+        <!-- <div class="ml-auto">
+          <select class="custom-select b-0">
+            <option selected="">January 2020</option>
+            <option value="1">February 2020</option>
+            <option value="2">March 2020</option>
+            <option value="3">April 2020</option>
+          </select>
+        </div> -->
+      </div>
+  
+    </div>
+    <div class="table-responsive">
+      <table class="table v-middle mb-0">
+        <thead>
+        <tr >
+            <th *ngFor='let ts of listUserTilte' class="border-top-0 font-medium border-bottom-0">{{ts}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor='let ts of topSelling'>
+            <td>
+              <div class="d-flex align-items-center">
+                <div class="m-r-10">
+                  <a class="btn btn-circle {{ts.productClass}} text-white"> {{ts.productInitial}}</a>
+                </div>
+                <div class="">
+                  <h4 class="m-b-0 font-16">{{ts.productName}}</h4>
+                </div>
+              </div>
+            </td>
+            <td>{{ts.licene}}</td>
+            <td>{{ts.agent}}</td>
+            <td>
+              <label class="label {{ts.technologyClass}}">{{ts.technology}}</label>
+            </td>
+            <td>{{ts.tickets}}</td>
+            <td>{{ts.sales}}</td>
+            <td>
+              <h5 class="m-b-0">${{ts.earning}}</h5>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

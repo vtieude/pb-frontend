@@ -1,8 +1,8 @@
 import { Component, AfterViewInit, OnInit } from '@angular/core';
-import { ROUTES } from './menu-items';
 import { RouteInfo } from './sidebar.metadata';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { HelperService } from '../helper/helper.service';
 //declare var $: any;
 
 @Component({
@@ -25,11 +25,14 @@ export class SidebarComponent implements OnInit {
   constructor(
     private modalService: NgbModal,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private helper: HelperService
   ) {}
 
   // End open close
   ngOnInit() {
-    this.sidebarnavItems = ROUTES.filter(sidebarnavItem => sidebarnavItem);
+    this.helper.userInformationSubject.subscribe(data => {
+      this.sidebarnavItems = data.ListMenuItem.filter(sidebarnavItem => sidebarnavItem);
+    })
   }
 }
