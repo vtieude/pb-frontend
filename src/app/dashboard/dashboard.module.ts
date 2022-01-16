@@ -8,7 +8,7 @@ import { SalesGraphComponent } from './dashboard-components/sales-graph/sales-gr
 import { VisitGraphComponent } from './dashboard-components/visit-graph/visit-graph.component';
 import { WebsiteGraphComponent } from './dashboard-components/website-graph/website-graph.component';
 import { CardsComponent } from './dashboard-components/cards/cards.component';
-import { ListUserComponent } from './dashboard-components/list-user/list-user.component';
+import { OverviewUserSaleComponent } from './dashboard-components/overview-user-sale/overview-user-sale/overview-user-sale.component';
 
 const routes: Routes = [
   {
@@ -29,6 +29,6 @@ const routes: Routes = [
     ChartsModule,
   ],
   declarations: [DashboardComponent, SalesGraphComponent, VisitGraphComponent,
-     WebsiteGraphComponent, CardsComponent, ListUserComponent],
+     WebsiteGraphComponent, CardsComponent, OverviewUserSaleComponent, OverviewUserSaleComponent],
 })
 export class DashboardModule { }

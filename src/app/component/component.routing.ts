@@ -15,11 +15,25 @@ import { NgbdtimepickerBasicComponent } from './timepicker/timepicker.component'
 import { NgbdtypeheadBasicComponent } from './typehead/typehead.component';
 import { ButtonsComponent } from './buttons/buttons.component';
 import { CardsComponent } from './card/card.component';
+import { ListUserComponent } from './manage-user/list-user/list-user.component';
 
 export const ComponentsRoutes: Routes = [
   {
     path: '',
     children: [
+      {
+        path: 'manageUser',
+        component: ListUserComponent,
+        data: {
+          title: 'Quản lí nhân viên',
+          urls: [
+            { title: 'Dashboard', url: '/dashboard' },
+            { title: 'ngComponent' },
+            { title: 'Quản lí nhân viên' }
+          ]
+        }
+      },
+      //Todo Unused Component
       {
         path: 'progressbar',
         component: NgbdpregressbarBasicComponent,

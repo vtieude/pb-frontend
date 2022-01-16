@@ -51,7 +51,7 @@ export class Consts {
             title: 'Quản Lí Cá Nhân',
             icon: 'mdi mdi-dots-horizontal',
             class: 'nav-small-cap',
-            extralink: true,
+            extralink: false,
             submenu: []
           },
           {
@@ -59,18 +59,18 @@ export class Consts {
             title: 'Quản lí bán hàng',
             icon: 'mdi mdi-dots-horizontal',
             class: 'nav-small-cap',
-            extralink: true,
+            extralink: false,
             submenu: []
           },
     ]
 
     public static MenuItemSuperAdmin: RouteInfo[] = [
         {
-            path: '',
+            path: '/component/manageUser',
             title: 'Quản lí nhân viên',
-            icon: 'mdi mdi-dots-horizontal',
-            class: 'nav-small-cap',
-            extralink: true,
+            icon: 'mdi mdi-equal',
+            class: '',
+            extralink: false,
             submenu: []
           },
           {
@@ -78,7 +78,7 @@ export class Consts {
             title: 'Báo cáo doanh số',
             icon: 'mdi mdi-dots-horizontal',
             class: 'nav-small-cap',
-            extralink: true,
+            extralink: false,
             submenu: []
           },
     ]

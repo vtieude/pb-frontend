@@ -1,65 +1,58 @@
-export interface Product {
-    productClass: string,
-    productInitial: string,
-    productName: string,
-    licene: string,
-    agent: string,
-    technologyClass: string,
-    technology: string,
-    tickets: number,
-    sales: number,
-    earning: number,
+import { saleOverview_GetOverviewUsersSales } from "src/app/services/sale-service/__generated__/saleOverview";
+
+export class  Product implements  saleOverview_GetOverviewUsersSales{
+    productClass: string | undefined;
+    productInitial: string | undefined;
+    UserName!: string;
+    UserRole!: string;
+    UserEmail!: string | null;
+    TotalSaledProduct!: number;
+    EarningMoney!: number;
+    constructor() {
+      }
+    __typename!: "OverviewUserSaleDto";
 }
 
 export const TopSelling: Product[] = [
-
     {
         productClass: 'btn-info',
         productInitial: 'E',
-        productName: 'Elite Admin',
-        licene: 'Single Use',
-        agent: 'John Doe',
-        technologyClass: 'label-danger',
-        technology: 'Angular',
-        tickets: 46,
-        sales: 356,
-        earning: 2850.0,
+        UserName: 'Elite Admin',
+        UserEmail: 'Single Use',
+        UserRole: 'Nhan Vien',
+        TotalSaledProduct: 356,
+        EarningMoney: 2850.0,
+        __typename!: "OverviewUserSaleDto"
     },
     {
         productClass: 'btn-orange',
         productInitial: 'M',
-        productName: 'Monster Admin',
-        licene: 'Single Use',
-        agent: 'Venessa Fern',
-        technologyClass: 'label-info',
-        technology: 'Vue Js',
-        tickets: 46,
-        sales: 356,
-        earning: 2850.0,
+        UserName: 'Elite Admin',
+        UserEmail: 'Single Use',
+        UserRole: 'Nhan Vien',
+        TotalSaledProduct: 356,
+        EarningMoney: 2850.0,
+        __typename!: "OverviewUserSaleDto"
     },
     {
         productClass: 'btn-success',
         productInitial: 'M',
-        productName: 'Material Pro Admin',
-        licene: 'Single Use',
-        agent: 'John Doe',
-        technologyClass: 'label-success',
-        technology: 'Bootstrap',
-        tickets: 46,
-        sales: 356,
-        earning: 2850.0,
+        UserName: 'Elite Admin',
+        UserEmail: 'Single Use',
+        UserRole: 'Nhan Vien',
+        TotalSaledProduct: 356,
+        EarningMoney: 2850.0,
+        __typename!: "OverviewUserSaleDto"
     },
     {
         productClass: 'btn-purple',
         productInitial: 'A',
-        productName: 'Ample Admin',
-        licene: 'Single Use',
-        agent: 'John Doe',
-        technologyClass: 'label-purple',
-        technology: 'React',
-        tickets: 46,
-        sales: 356,
-        earning: 2850.0,
+        UserName: 'Elite Admin',
+        UserEmail: 'Single Use',
+        UserRole: 'Nhan Vien',
+        TotalSaledProduct: 356,
+        EarningMoney: 2850.0,
+        __typename!: "OverviewUserSaleDto"
     },
 
 ]

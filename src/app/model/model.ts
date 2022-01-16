@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { OverviewUserSaleFilter, Pagination } from '__generated__/globalTypes';
+import { saleOverviewVariables } from '../services/sale-service/__generated__/saleOverview';
 import { loginVariables } from '../services/__generated__/login';
 @Injectable()
 export class Todo {
@@ -22,7 +24,24 @@ export class loginVariablesInput implements loginVariables {
   constructor(email: string, password: string) {
     this.email = email;
     this.password = password;
+  }
 }
+
+export class saleOveriewVariablesInput implements saleOverviewVariables {
+  fitler?: OverviewUserSaleFilter | null;
+  page?: Pagination | null;
+  constructor(fitler: OverviewUserSaleFilter) {
+   this.fitler = fitler;
+  }
+}
+
+export class saleFilter implements OverviewUserSaleFilter {
+  UserName?: string | null;
+  DateTime?: any | null;
+  constructor(userName: string | null, dateTime: any | null) {
+   this.UserName = userName;
+   this.DateTime = dateTime;
+  }
 }
 
 export enum Role {

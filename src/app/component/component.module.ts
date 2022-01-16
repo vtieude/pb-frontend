@@ -21,6 +21,7 @@ import { NgbdtypeheadBasicComponent } from './typehead/typehead.component';
 import { ButtonsComponent } from './buttons/buttons.component';
 import { CardsComponent } from './card/card.component';
 import { RouterModule } from '@angular/router';
+import { ListUserComponent } from './manage-user/list-user/list-user.component';
 
 @NgModule({
   imports: [
@@ -45,7 +46,8 @@ import { RouterModule } from '@angular/router';
     NgbdtimepickerBasicComponent,
     NgbdtypeheadBasicComponent,
     ButtonsComponent,
-    CardsComponent
+    CardsComponent,
+    ListUserComponent
   ]
 })
 export class ComponentsModule {}

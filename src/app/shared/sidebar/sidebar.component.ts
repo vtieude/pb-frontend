@@ -23,9 +23,6 @@ export class SidebarComponent implements OnInit {
   }
 
   constructor(
-    private modalService: NgbModal,
-    private router: Router,
-    private route: ActivatedRoute,
     private helper: HelperService
   ) {}
 
