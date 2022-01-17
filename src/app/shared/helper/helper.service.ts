@@ -23,6 +23,8 @@ export class HelperService {
   determinUserRolePermission(){
      this.auth.currentUserSubject.subscribe(data => {
        if (!(data.id > 0) || data.role === "") {
+         this.resetDataWhenUserLogout();
+         this.updateNextUserInformation();
          return;
        }
       if (data.role === Role.Admin) {
@@ -48,8 +50,12 @@ export class HelperService {
     }
     this.userInformation.ListMenuItem = [...this.userInformation.ListMenuItem, ...Consts.UnusedMenuItem];
   }
+  resetDataWhenUserLogout() {
+    this.userInformation = new UserRoleInformation();
+  }
 }
+
 export class UserRoleInformation {
   ListUserDashBoardSalesOffInformation!: string[];
-  ListMenuItem!: RouteInfo[]
+  ListMenuItem!: RouteInfo[];
 }
