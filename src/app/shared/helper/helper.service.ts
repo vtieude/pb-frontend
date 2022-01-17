@@ -22,7 +22,7 @@ export class HelperService {
   }
   determinUserRolePermission(){
      this.auth.currentUserSubject.subscribe(data => {
-       if (!(data.id > 0) || data.role === "") {
+       if (!data || !(data.id > 0) || data.role === "") {
          this.resetDataWhenUserLogout();
          this.updateNextUserInformation();
          return;
