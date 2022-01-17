@@ -28,7 +28,9 @@ export class SidebarComponent implements OnInit {
 
   // End open close
   ngOnInit() {
-    this.sidebarnavItems = this.helper.userInformation.ListMenuItem.filter(sidebarnavItem => sidebarnavItem)
+    if (!!this.helper.userInformation &&  !!this.helper.userInformation && !!this.helper.userInformation.ListMenuItem) {
+      this.sidebarnavItems = this.helper.userInformation.ListMenuItem.filter(sidebarnavItem => sidebarnavItem)
+    }
     this.helper.userInformationSubject.subscribe(data => {
       this.sidebarnavItems = data.ListMenuItem.filter(sidebarnavItem => sidebarnavItem);
     })
