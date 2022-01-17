@@ -9,7 +9,7 @@ import { RouteInfo } from '../sidebar/sidebar.metadata';
   providedIn: 'root'
 })
 export class HelperService {
-  userInformation: UserRoleInformation;
+  public userInformation: UserRoleInformation;
   userInformationSubject = new Subject<UserRoleInformation>();
   constructor(private auth: AuthService) {
     this.userInformation = new UserRoleInformation;
