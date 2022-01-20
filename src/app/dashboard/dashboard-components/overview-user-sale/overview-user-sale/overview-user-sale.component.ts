@@ -24,7 +24,7 @@ export class OverviewUserSaleComponent implements OnInit {
       this.listUserTilte = data.ListUserDashBoardSalesOffInformation;
     })
     this.saleService.getUserSaleOverview(new saleFilter(null, null), null).subscribe(({data}) => {
-      if (!!data && data.GetOverviewUsersSales.length > 0) {
+      if (!!data && !!data.GetOverviewUsersSales &&  data.GetOverviewUsersSales.length > 0) {
       }
     })
   }

@@ -38,6 +38,7 @@ export class HelperService {
     });
   }
   combineUserMenuItem(role: string) {
+    this.userInformation.ListMenuItem = []; 
     if (role === Role.User) {
       this.userInformation.ListMenuItem = Consts.MenuItemNormalUser;
     }
