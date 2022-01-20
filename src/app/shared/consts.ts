@@ -188,4 +188,6 @@ export class Consts {
           submenu: []
         }
       ];
+
+      public static HomePageNavigation: string = "/dashboard"
 }

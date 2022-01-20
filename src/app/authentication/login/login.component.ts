@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'src/app/model/model';
 import { AuthService } from 'src/app/services/auth.service';
+import { Consts } from 'src/app/shared/consts';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -16,6 +17,9 @@ export class LoginComponent implements OnInit {
   constructor( private formBuilder: FormBuilder,
     private router: Router,
     private authenticationService: AuthService) {
+      if (this.authenticationService.isAuthenticated()){
+        this.router.navigate([Consts.HomePageNavigation]);
+      }
      }
 
   ngOnInit(): void {
@@ -47,7 +51,7 @@ export class LoginComponent implements OnInit {
         userLogin.id = data?.login?.id || 0;
         this.authenticationService.updateUserLoginInformation(userLogin)
         this.authenticationService.setUserLogin();
-        this.router.navigate(['/dashboard']);
+        this.router.navigate([Consts.HomePageNavigation]);
         this.loading = false;
 
        }, (error) => {
