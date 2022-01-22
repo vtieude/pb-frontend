@@ -26,6 +26,7 @@ export class OverviewUserSaleComponent implements OnInit {
     this.saleService.getUserSaleOverview(new saleFilter(null, null), null).subscribe(({data}) => {
       if (!!data && !!data.GetOverviewUsersSales &&  data.GetOverviewUsersSales.length > 0) {
       }
+    }, (err) => {
     })
   }
 }

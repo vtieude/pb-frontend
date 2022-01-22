@@ -98,7 +98,7 @@ logout(): void {
   localStorage.clear();
   // tslint:disable-next-line: prefer-const
   let nullUser!: User ;
-  this.apollo.getClient().resetStore();
+  this.apollo.getClient().resetStore().catch((e) => {});
   this.isUserLogin = false;
   this.isLoginSubject.next(this.isUserLogin);
   this.router.navigate(['/login']);
