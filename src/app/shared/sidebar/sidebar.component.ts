@@ -32,7 +32,11 @@ export class SidebarComponent implements OnInit {
       this.sidebarnavItems = this.helper.userInformation.ListMenuItem.filter(sidebarnavItem => sidebarnavItem)
     }
     this.helper.userInformationSubject.subscribe(data => {
-      this.sidebarnavItems = data.ListMenuItem.filter(sidebarnavItem => sidebarnavItem);
+      if (!!data && !!data.ListMenuItem ) {
+        this.sidebarnavItems = data.ListMenuItem.filter(sidebarnavItem => sidebarnavItem);
+      } else {
+        this.sidebarnavItems = [];
+      }
     })
   }
 }

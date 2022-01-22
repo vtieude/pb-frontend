@@ -1,1 +1,46 @@
-<p>list-user works!</p>
+<div class="card">
+    <div class="card-body">
+      <div class="d-md-flex align-items-center">
+        <div>
+          <h4 class="card-title">
+            Danh sách nhân viên
+          </h4>
+        </div>
+        <!-- <div class="ml-auto">
+          <select class="custom-select b-0">
+            <option selected="">January 2020</option>
+            <option value="1">February 2020</option>
+            <option value="2">March 2020</option>
+            <option value="3">April 2020</option>
+          </select>
+        </div> -->
+      </div>
+  
+    </div>
+    <div class="table-responsive">
+      <table class="table v-middle mb-0">
+        <thead>
+        <tr >
+            <th *ngFor='let ts of listUserTilte' class="border-top-0 font-medium border-bottom-0">{{ts}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor='let ts of listUsersInformation'>
+            <td>
+              <div class="d-flex align-items-center">
+                <div class="m-r-10">
+                  <a class="btn btn-circle {{ts.Username | fname : true}} text-white"> {{ts.Username | fname}}</a>
+                </div>
+                <div class="">
+                  <h4 class="m-b-0 font-16">{{ts.Username}}</h4>
+                </div>
+              </div>
+            </td>
+            <td>{{ts.Email}}</td>
+            <td>{{ts.RoleLabel}}</td>
+            <td>{{ts.Active}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

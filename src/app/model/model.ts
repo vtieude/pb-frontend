@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { OverviewUserSaleFilter, Pagination } from '__generated__/globalTypes';
 import { saleOverviewVariables } from '../services/sale-service/__generated__/saleOverview';
+import { getAllUsers_GetAllUsers } from '../services/user-service/__generated__/getAllUsers';
 import { loginVariables } from '../services/__generated__/login';
 @Injectable()
 export class Todo {
@@ -8,9 +9,14 @@ export class Todo {
     message: string | undefined;
     complete: boolean | undefined;
   }
-export class User {
+export class User implements getAllUsers_GetAllUsers{
+    Email!: string;
+    Username!: string;
+    __typename!: 'User';
+    RoleLabel!: string;
+    Role!: string;
+    Active!: boolean | null;
     id!: number;
-    userName!: string;
     password!: string;
     firstName!: string;
     lastName!: string;
@@ -50,3 +56,4 @@ export enum Role {
   Staff = 'staff',
   SuperAdmin = "super_admin"
 }
+

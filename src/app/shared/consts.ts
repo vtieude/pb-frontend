@@ -5,14 +5,14 @@ export class Consts {
     // Dash board List Sales off User view
     public static SuperAdminListUserSalesOffDashboard : string[] = [
         "Name User",
-        "UserId",
+        "UserEmail",
         "Role", 
         "Sales",
         "Earnings"
     ]
     public static AdminListUserSalesOffDashboard : string[] = [
          "Tên Nhân Viên",
-         "Mã Số Nhân Viên",
+         "Email",
          "Chức vụ", 
          "Tổng Sản phẩm đã bán",
          "Doanh thu"

@@ -22,6 +22,7 @@ import { ButtonsComponent } from './buttons/buttons.component';
 import { CardsComponent } from './card/card.component';
 import { RouterModule } from '@angular/router';
 import { ListUserComponent } from './manage-user/list-user/list-user.component';
+import { PipesModule } from '../shared/pipe/pipes.module';
 
 @NgModule({
   imports: [
@@ -29,7 +30,8 @@ import { ListUserComponent } from './manage-user/list-user/list-user.component';
     RouterModule.forChild(ComponentsRoutes),
     FormsModule,
     ReactiveFormsModule,
-    NgbModule
+    NgbModule,
+    PipesModule
   ],
   declarations: [
     NgbdpregressbarBasicComponent,

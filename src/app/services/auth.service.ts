@@ -1,11 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { environment } from 'src/environments/environment';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { loginVariablesInput, User } from '../model/model';
 import { Apollo, gql, QueryRef } from 'apollo-angular';
-import { variable } from '@angular/compiler/src/output/output_ast';
 import { Router } from '@angular/router';
 import { login } from './__generated__/login';
 import { getMe } from './__generated__/getMe';
@@ -14,19 +11,11 @@ import { getMe } from './__generated__/getMe';
 })
 
 export class AuthService {
-  private usersQuery: QueryRef<{users: User}, { }>
   public currentUserSubject: BehaviorSubject<User>;
   public isLoginSubject = new Subject<boolean>();
   public isUserLogin = false;
   private currentUser: User;
   constructor(private http: HttpClient, private apollo: Apollo, private router: Router)  {
-    this.usersQuery = this.apollo.watchQuery({
-      query: gql`query characters {
-        GetAllUsers {
-          id
-        }
-      }`
-    });
     this.currentUser = new User();
     this.currentUserSubject = new BehaviorSubject<User>(this.currentUser);
     this.me();
@@ -62,7 +51,7 @@ me() {
     this.apollo.watchQuery<getMe>({
       query: query
     }).valueChanges.subscribe(({data}) => {
-      this.currentUser.userName = data.Me?.userName;
+      this.currentUser.Username = data.Me?.userName;
       this.currentUser.id = data.Me?.id;
       this.currentUser.role = data.Me?.role;
       this.nextCurrentUserLogin()
@@ -87,11 +76,6 @@ me() {
     mutation: loginMutation,
     variables: inputLogin
   });
-}
-
-async getAllUsers(): Promise<User> {
-  const result = await this.usersQuery.refetch({  });
-  return result.data.users;
 }
 
 isAuthenticated(): boolean {

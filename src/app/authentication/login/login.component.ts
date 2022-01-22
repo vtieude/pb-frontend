@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
        .subscribe(({data}) => {
         localStorage.setItem('token', data?.login?.token || "");
         let userLogin = new User();
-        userLogin.userName = data?.login?.userName || "";
+        userLogin.Username = data?.login?.userName || "";
         userLogin.role = data?.login?.role || "";
         userLogin.token = data?.login?.token;
         userLogin.id = data?.login?.id || 0;
