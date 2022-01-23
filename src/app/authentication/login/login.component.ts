@@ -59,9 +59,5 @@ export class LoginComponent implements OnInit {
         this.loading = false;
         ;
        });
-    //  this.authenticationService.getAllUsers().then((response) => {
-    //    this.loading = true
-    //  }, (reponseError) => {
-    //  });
   }
 }

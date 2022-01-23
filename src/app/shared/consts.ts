@@ -189,5 +189,29 @@ export class Consts {
         }
       ];
 
-      public static HomePageNavigation: string = "/dashboard"
+
+      public static HomePageNavigation: string = "/dashboard";
+      // Title
+      public static TitleDelete: string = "Xoá";
+      public static TitleEdit: string = "Sửa";
+    
+}
+export class TitleManagerStaff {
+      public TitleCreateNew: string = "Tạo mới";
+      public TitleStaffConfirm: string = "Tạo mới";
+      public TitleStaffUserName: string = "Tên nhân viên";
+      public TitleStaffErrorUserNameRequired: string = "Tên nhân viên bắt buộc nhập";
+      public TitleStaffErrorEmailRequired: string = "Email bắt buộc nhập";
+      public TitleCreateNewStaffPassword: string = "Mật khẩu";
+      public TitleCreateNewStaffPasswordAgain: string = "Nhập lại mật khẩu";
+      public TitleCreateNewStaffPasswordNotMatch: string = "Mật khẩu không giống nhau";
+      public TitleCreateNewStaffErrPasswordReq: string = "Mật khẩu bắt buộc nhập";
+      public TitleStaffPhoneNumber: string = "Số điện thoại";
+      public TitleStaffRole: string = "Chức vụ";
+      public TitleCreateNewStaff: string = "Tạo mới nhân viên";
+      public TitleListStaff: string = "Danh sách nhân viên";
+      public TitleTableColumnsListStaff: string[] = [ "Tên Nhân Viên",
+      "Email",
+      "Chức vụ", 
+      "Trạng thái"];
 }

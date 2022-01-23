@@ -3,17 +3,12 @@
       <div class="d-md-flex align-items-center">
         <div>
           <h4 class="card-title">
-            Danh sách nhân viên
+            {{staffTitle.TitleListStaff}}
           </h4>
         </div>
-        <!-- <div class="ml-auto">
-          <select class="custom-select b-0">
-            <option selected="">January 2020</option>
-            <option value="1">February 2020</option>
-            <option value="2">March 2020</option>
-            <option value="3">April 2020</option>
-          </select>
-        </div> -->
+        <div class="ml-auto">
+          <button type="button" (click)="openModelCreateUser(newUserContent)" class="btn btn-rounded btn-outline-danger">{{staffTitle.TitleCreateNew}}</button>
+        </div>
       </div>
   
     </div>
@@ -21,7 +16,7 @@
       <table class="table v-middle mb-0">
         <thead>
         <tr >
-            <th *ngFor='let ts of listUserTilte' class="border-top-0 font-medium border-bottom-0">{{ts}}</th>
+            <th *ngFor='let ts of staffTitle.TitleTableColumnsListStaff' class="border-top-0 font-medium border-bottom-0">{{ts}}</th>
           </tr>
         </thead>
         <tbody>
@@ -36,11 +31,100 @@
                 </div>
               </div>
             </td>
-            <td>{{ts.Email}}</td>
+            <td>
+              <div class="d-flex align-items-center">
+                <a>{{ts.Email}}</a>
+              </div>
+            </td>
             <td>{{ts.RoleLabel}}</td>
             <td>{{ts.Active}}</td>
+            <td>
+                <div class="d-flex align-items-center">
+                  <div class="m-r-10">
+                    <button type="button" ngbTooltip="{{btnEdit}}" class="btn btn-circle " (click)="reset()"><i class="fas fa-edit"></i></button>
+                  </div>
+                  <button type="button" ngbTooltip="{{btnDelete}}" class="btn btn-circle " (click)="reset()"> <i class="fas fas fa-trash"></i></button>
+                </div>
+            </td>
           </tr>
         </tbody>
       </table>
     </div>
+    <ng-template #newUserContent let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title">{{staffTitle.TitleCreateNewStaff}}</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="staffForm" (submit)="onSubmitCreateUser($event)">
+            <div class="form-group">
+              <div class="row">
+                <div class="col-lg-6 col-md-6">
+                  <label class="control-label required-field" for="username">{{staffTitle.TitleStaffUserName}}</label>
+                  <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }"/>
+                  <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                      <div *ngIf="f.username.errors.required">{{staffTitle.TitleStaffErrorUserNameRequired}}</div>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                  <label for="email" class="control-label required-field">Email</label>
+                  <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                  <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                      <div *ngIf="f.email.errors.required">{{staffTitle.TitleStaffErrorEmailRequired}}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="row">
+                <div class="col-lg-6 col-md-6">
+                  <label for="password"  class="control-label required-field" >{{staffTitle.TitleCreateNewStaffPassword}}</label>
+                  <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                  <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                      <div *ngIf="f.password.errors.required">{{staffTitle.TitleCreateNewStaffErrPasswordReq}}</div>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                  <label for="password2"  class="control-label required-field">{{staffTitle.TitleCreateNewStaffPasswordAgain}}</label>
+                  <input type="password" formControlName="password2" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password2.errors }" />
+                  <div *ngIf="submitted && f.password2.errors" class="invalid-feedback">
+                      <div *ngIf="f.password2.errors.required">{{staffTitle.TitleCreateNewStaffErrPasswordReq}}</div>
+                      <div *ngIf="f.password2.errors.pwdNotMatch">{{staffTitle.TitleCreateNewStaffPasswordNotMatch}}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="row">
+                <div class="col-lg-6 col-md-6">
+                  <label for="phoneNumber">{{staffTitle.TitleStaffPhoneNumber}}</label>
+                  <input type="number" oninput="this.value=this.value.slice(0,this.maxLength)" formControlName="phoneNumber" class="form-control"  maxlength="15"  />
+                </div>
+                <div class="col-lg-6 col-md-6">
+                  <label for="role" class="control-label required-field">{{staffTitle.TitleStaffRole}}</label>
+                  <div>
+                    <select class="form-control" formControlName="role" [ngClass]="{ 'is-invalid': submitted && f.role.errors }">
+                      <option *ngFor='let ts of listRole'  [value]="ts.role" [selected]="ts.isSelected">{{ts.label}}</option>
+                    </select>
+                    <div *ngIf="submitted && f.role.errors" class="invalid-feedback">
+                      <div *ngIf="f.role.errors.required">Role is required</div>
+                    </div>
+                  </div>
+                 
+                </div>
+              </div>
+            </div>
+            <button [disabled]="loading" type="button" (click)="onSubmitCreateUser($event)"  class="btn btn-primary">
+                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                {{staffTitle.TitleStaffConfirm}}
+            </button>
+            <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+        </form>
+    </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+      </div>
+    </ng-template>
   </div>

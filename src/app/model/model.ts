@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { OverviewUserSaleFilter, Pagination } from '__generated__/globalTypes';
+import { NewUser, OverviewUserSaleFilter, Pagination } from '__generated__/globalTypes';
 import { saleOverviewVariables } from '../services/sale-service/__generated__/saleOverview';
+import { createUserVariables } from '../services/user-service/__generated__/createUser';
 import { getAllUsers_GetAllUsers } from '../services/user-service/__generated__/getAllUsers';
 import { loginVariables } from '../services/__generated__/login';
 @Injectable()
@@ -31,6 +32,9 @@ export class loginVariablesInput implements loginVariables {
     this.email = email;
     this.password = password;
   }
+}
+export class createNewUserVariablesInput implements createUserVariables {
+  input!: NewUser;
 }
 
 export class saleOveriewVariablesInput implements saleOverviewVariables {

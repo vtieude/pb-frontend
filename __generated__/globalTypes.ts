@@ -7,6 +7,14 @@
 // START Enums and Input Objects
 //==============================================================
 
+export interface NewUser {
+  userName: string;
+  email: string;
+  password: string;
+  roleName: string;
+  phoneNumber?: string | null;
+}
+
 export interface OverviewUserSaleFilter {
   UserName?: string | null;
   DateTime?: any | null;

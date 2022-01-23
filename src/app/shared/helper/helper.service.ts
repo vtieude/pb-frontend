@@ -45,9 +45,13 @@ export class HelperService {
     const staffMenuPermission = [ ...Consts.MenuItemNormalUser, ...Consts.MenuItemStaff];
     if (role === Role.Staff) {
       this.userInformation.ListMenuItem = staffMenuPermission;
+      this.userInformation.ListRoleByUserLogin = [{role: "user", label: "Người dùng", isSelected: true}];
     }
     if (role === Role.SuperAdmin || role === Role.Admin) {
       this.userInformation.ListMenuItem = [ ...staffMenuPermission, ...Consts.MenuItemSuperAdmin];
+      this.userInformation.ListRoleByUserLogin = [{role: "admin", label: "Quản lí", isSelected: false}, 
+      {role: "staff", label: "Nhân viên", isSelected: false}
+      , {role: "user", label: "Người dùng", isSelected: true}];
     }
     this.userInformation.ListMenuItem = [...this.userInformation.ListMenuItem, ...Consts.UnusedMenuItem];
   }
@@ -59,4 +63,5 @@ export class HelperService {
 export class UserRoleInformation {
   ListUserDashBoardSalesOffInformation!: string[];
   ListMenuItem!: RouteInfo[];
+  ListRoleByUserLogin: any[] = [];
 }
