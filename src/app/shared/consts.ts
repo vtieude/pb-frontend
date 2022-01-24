@@ -202,6 +202,7 @@ export class Consts {
 export class TitleManagerStaff {
       public TitleCreateNew: string = "Tạo mới";
       public TitleStaffConfirm: string = "Tạo mới";
+      public TitleStaffEditBtn: string = "Sửa";
       public TitleStaffUserName: string = "Tên nhân viên";
       public TitleStaffErrorUserNameRequired: string = "Tên nhân viên bắt buộc nhập";
       public TitleStaffErrorEmailRequired: string = "Email bắt buộc nhập";
@@ -224,6 +225,11 @@ export class TitleManagerStaff {
 }
 
 export class GraphqlQuery{
+  public static UserMutationEditUser = gql`mutation editUser($input:  EditUserModel!){
+    editUser(input: $input) {
+      id
+    }
+  }`;
   public static UserMutationDeleteUser: DocumentNode = gql`mutation deleteUser($userId: Int!) {
     deleteUser(userId: $userId)
   }`;
@@ -260,6 +266,7 @@ export class GraphqlQuery{
       RoleLabel
       Role
       Active
+      PhoneNumber
     }
   }`;
   public static SaleQueryGetSaleOverview = gql`query saleOverview($fitler: OverviewUserSaleFilter, $page: Pagination) {

@@ -4,8 +4,9 @@ import { DocumentNode } from 'graphql';
 import { createNewUserVariablesInput, User } from 'src/app/model/model';
 import { GraphqlQuery } from 'src/app/shared/consts';
 import { deleteUserVariables } from 'src/app/shared/__generated__/deleteUser';
+import { editUserVariables } from 'src/app/shared/__generated__/editUser';
 import { getAllUsers } from 'src/app/shared/__generated__/getAllUsers';
-import { NewUser } from '__generated__/globalTypes';
+import { EditUserModel, NewUser } from '__generated__/globalTypes';
 
 @Injectable({
   providedIn: 'root'
@@ -18,11 +19,21 @@ export class UserService {
       query: GraphqlQuery.UserQueryGetAllUser
     }).valueChanges;
   }
+  editUser(userEdit: EditUserModel) {
+    const letVariable:editUserVariables  = {
+      input : userEdit
+    }
+    return this.apollo.mutate<User>({
+      mutation: GraphqlQuery.UserMutationEditUser,
+      variables: letVariable,
+      refetchQueries:[{query: GraphqlQuery.UserQueryGetAllUser}]
+    });
+  }
   deleteUser(userId: number) {
     const letVariable:deleteUserVariables  = {
       userId : userId
     }
-    return this.apollo.mutate<User>({
+    return this.apollo.mutate<boolean>({
       mutation: GraphqlQuery.UserMutationDeleteUser,
       variables: letVariable,
       refetchQueries:[{query: GraphqlQuery.UserQueryGetAllUser}]

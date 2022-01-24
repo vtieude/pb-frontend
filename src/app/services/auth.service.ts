@@ -47,7 +47,7 @@ me() {
     }).valueChanges.subscribe(({data}) => {
       this.currentUser.Username = data.Me?.userName;
       this.currentUser.id = data.Me?.id;
-      this.currentUser.role = data.Me?.role;
+      this.currentUser.Role = data.Me?.role;
       this.nextCurrentUserLogin()
       this.setUserLogin();
     });

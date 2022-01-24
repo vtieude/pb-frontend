@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('token', data?.login?.token || "");
         let userLogin = new User();
         userLogin.Username = data?.login?.userName || "";
-        userLogin.role = data?.login?.role || "";
+        userLogin.Role = data?.login?.role || "";
         userLogin.token = data?.login?.token;
         userLogin.id = data?.login?.id || 0;
         this.authenticationService.updateUserLoginInformation(userLogin)

@@ -41,7 +41,7 @@
             <td>
                 <div class="d-flex align-items-center">
                   <div class="m-r-10">
-                    <button type="button" ngbTooltip="{{btnEdit}}" class="btn btn-circle " (click)="reset()"><i class="fas fa-edit"></i></button>
+                    <button type="button" ngbTooltip="{{btnEdit}}" class="btn btn-circle " (click)="selectedUserToEdit(ts, editUserContent)"><i class="fas fa-edit"></i></button>
                   </div>
                   <button type="button" ngbTooltip="{{btnDelete}}" class="btn btn-circle " (click)="selectedUserToDelete(ts, confirmDeleteUser)"> <i class="fas fas fa-trash"></i></button>
                 </div>
@@ -139,7 +139,76 @@
     </div>
 
       <div class="modal-footer">
-        <button type="button" class="btn btn-light" (click)="deleteUser()">{{staffTitle.TitleDelete}}</button>
+        <button [disabled]="loading" type="button" class="btn btn-light" (click)="deleteUser()">{{staffTitle.TitleDelete}}</button>
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">{{staffTitle.TitleCancelled}}</button>
+      </div>
+    </ng-template>
+    <ng-template #editUserContent let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title">{{staffTitle.TitleCreateNewStaff}}</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="editStaffForm" (submit)="onSubmitEditUser($event)">
+            <div class="form-group">
+              <div class="row">
+                <div class="col-lg-6 col-md-6">
+                  <label class="control-label required-field" for="username">{{staffTitle.TitleStaffUserName}}</label>
+                  <input type="text"  formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }"/>
+                  <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                      <div *ngIf="f.username.errors.required">{{staffTitle.TitleStaffErrorUserNameRequired}}</div>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                  <label for="email" class="control-label required-field">Email</label>
+                  <input type="text" formControlName="email"  class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                  <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                      <div *ngIf="f.email.errors.required">{{staffTitle.TitleStaffErrorEmailRequired}}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="row">
+                <div class="col-lg-6 col-md-6">
+                  <label for="password"  class="control-label required-field" >{{staffTitle.TitleCreateNewStaffPassword}}</label>
+                  <input type="text" formControlName="password"  class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                  <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                      <div *ngIf="f.password.errors.required">{{staffTitle.TitleCreateNewStaffErrPasswordReq}}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="row">
+                <div class="col-lg-6 col-md-6">
+                  <label for="phoneNumber">{{staffTitle.TitleStaffPhoneNumber}}</label>
+                  <input type="number" oninput="this.value=this.value.slice(0,this.maxLength)" formControlName="phoneNumber" class="form-control"  maxlength="15"  />
+                </div>
+                <div class="col-lg-6 col-md-6">
+                  <label for="role" class="control-label required-field">{{staffTitle.TitleStaffRole}}</label>
+                  <div>
+                    <select class="form-control" formControlName="role" [ngClass]="{ 'is-invalid': submitted && f.role.errors }">
+                      <option *ngFor='let ts of editListRole'  [value]="ts.role" [selected]="ts.isSelected">{{ts.label}}</option>
+                    </select>
+                    <div *ngIf="submitted && f.role.errors" class="invalid-feedback">
+                      <div *ngIf="f.role.errors.required">Role is required</div>
+                    </div>
+                  </div>
+                 
+                </div>
+              </div>
+            </div>
+            <button [disabled]="loading" type="button" (click)="onSubmitEditUser($event)"  class="btn btn-primary">
+                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                {{staffTitle.TitleStaffEditBtn}}
+            </button>
+            <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+        </form>
+    </div>
+      <div class="modal-footer">
         <button type="button" class="btn btn-light" (click)="modal.close('Close click')">{{staffTitle.TitleCancelled}}</button>
       </div>
     </ng-template>

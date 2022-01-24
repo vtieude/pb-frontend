@@ -6,7 +6,7 @@ import { UserService } from 'src/app/services/user-service/user-service.service'
 import { Consts, TitleManagerStaff } from 'src/app/shared/consts';
 import { HelperService } from 'src/app/shared/helper/helper.service';
 import { SpinnerService } from 'src/app/shared/spinner.service';
-import { NewUser } from '__generated__/globalTypes';
+import { EditUserModel, NewUser } from '__generated__/globalTypes';
 
 @Component({
   selector: 'app-list-user',
@@ -22,7 +22,9 @@ export class ListUserComponent implements OnInit {
   submitted = false;
   error = '';
   staffForm!: FormGroup;
+  editStaffForm!: FormGroup;
   listRole: any[];
+  editListRole: any[];
   userSelected: User = new User;
   constructor(private userService: UserService, 
     private modalService: NgbModal,
@@ -30,14 +32,17 @@ export class ListUserComponent implements OnInit {
     private helper: HelperService,
     private spinnerToast: SpinnerService) {
       this.listRole = this.helper.userInformation?.ListRoleByUserLogin || [];
+      this.editListRole = this.helper.userInformation?.ListRoleByUserLogin || [];
      }
 
   ngOnInit(): void {
     this.helper.userInformationSubject.subscribe(data => {
       if (!!data) {
         this.listRole = data.ListRoleByUserLogin;
+        this.editListRole = data.ListRoleByUserLogin
       } else {
         this.listRole = [];
+        this.editListRole = [];
       }
       this.setValueForRoleFormControl();
     });
@@ -49,11 +54,24 @@ export class ListUserComponent implements OnInit {
       email: ['', Validators.required],
       phoneNumber:['']
     });
+    this.editStaffForm = this.formBuilder.group({
+      username: ['', Validators.required],
+      role: ['', Validators.required],
+      password: [{value: '******', disabled: true}, Validators.required],
+      email: [{value: '******', disabled: true}, Validators.required],
+      phoneNumber:['']
+    });
     this.loadListUserData();
   }
 
-  updateSelectedUser(user: User) {
+  selectedUserToEdit(user: User, content: string) {
     this.userSelected = user;
+    this.editControls.username.setValue(user.Username);
+    this.editControls.role.setValue(user.Role);
+    this.editControls.phoneNumber.setValue(user.PhoneNumber);
+    this.editControls.email.setValue(user.Email);
+    this.setValueRoleEditFormControl(user.Role || "");
+    this.openModel(content);
   }
 
   selectedUserToDelete(user: User, content: string) {
@@ -71,12 +89,35 @@ export class ListUserComponent implements OnInit {
       this.spinnerToast.showError("Error", err);
     })
   }
-
+  onSubmitEditUser() {
+    this.loading = true;
+    const input: EditUserModel = {
+      userId: this.userSelected.id,
+      userName: this.editControls.username.value,
+      roleName: this.editControls.role.value,
+      phoneNumber: this.editControls.phoneNumber.value?.toString()
+    }
+    this.userService.editUser(input).subscribe(({data}) => {
+      this.loading = false;
+      this.spinnerToast.showToastSuccess("", Consts.TitleSuccess);
+      this.modalService.dismissAll();
+    }, (err) => {
+      this.loading = false;
+      this.spinnerToast.showError("Error", err);
+    })
+  }
+  get editControls() { 
+    if (!this.editStaffForm) {
+      this.editStaffForm = this.formBuilder.group({});
+    }
+    return this.editStaffForm.controls; 
+  }
   get f() { 
     if (!this.staffForm) {
       this.staffForm = this.formBuilder.group({});
     }
-    return this.staffForm.controls; }
+    return this.staffForm.controls; 
+  }
   loadListUserData() {
     this.userService.getAllUsers().subscribe(({data}): void => {
       this.listUsersInformation = data.GetAllUsers as unknown as User[];
@@ -93,6 +134,18 @@ export class ListUserComponent implements OnInit {
     });
     }
   }
+  setValueRoleEditFormControl(roleName: string) {
+    if (!!this.editListRole) {
+      this.editListRole.forEach(element => {
+        if (element.role == roleName) {
+          element.isSelected = true;
+        } else {
+          element.isSelected = false;
+        }
+      });
+    }
+  }
+
   openModel(content:string) {
     this.modalService.open(content, { centered: true, size: 'lg' });
   }
@@ -118,8 +171,11 @@ export class ListUserComponent implements OnInit {
     };
     this.userService.createNewUsers(newUserInput).subscribe(({data}) => {
       this.loading = false;
+      this.staffForm.reset();
+      this.setValueForRoleFormControl();
       this.spinnerToast.showToastSuccess("", Consts.TitleSuccess);
       this.modalService.dismissAll();
+      this.submitted = false;
     }, (err) => {
       this.loading = false;
       this.spinnerToast.showError("Error", err);

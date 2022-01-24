@@ -11,6 +11,7 @@ export class Todo {
     complete: boolean | undefined;
   }
 export class User implements getAllUsers_GetAllUsers{
+    PhoneNumber!: string | null;
     Email!: string;
     Username!: string;
     __typename!: 'User';
@@ -22,7 +23,6 @@ export class User implements getAllUsers_GetAllUsers{
     firstName!: string;
     lastName!: string;
     token?: string;
-    role: string | undefined;
     expires_at!: number;
 }
 export class loginVariablesInput implements loginVariables {

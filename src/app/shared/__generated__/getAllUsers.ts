@@ -15,6 +15,7 @@ export interface getAllUsers_GetAllUsers {
   RoleLabel: string;
   Role: string;
   Active: boolean | null;
+  PhoneNumber: string | null;
 }
 
 export interface getAllUsers {

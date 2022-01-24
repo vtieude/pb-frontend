@@ -22,18 +22,18 @@ export class HelperService {
   }
   determinUserRolePermission(){
      this.auth.currentUserSubject.subscribe(data => {
-       if (!data || !(data.id > 0) || data.role === "") {
+       if (!data || !(data.id > 0) || data.Role === "") {
          this.resetDataWhenUserLogout();
          this.updateNextUserInformation();
          return;
        }
-      if (data.role === Role.Admin) {
+      if (data.Role === Role.Admin) {
         this.userInformation.ListUserDashBoardSalesOffInformation = Consts.AdminListUserSalesOffDashboard;
       }
-      if (data.role === Role.SuperAdmin) {
+      if (data.Role === Role.SuperAdmin) {
         this.userInformation.ListUserDashBoardSalesOffInformation = Consts.SuperAdminListUserSalesOffDashboard;
       }
-      this.combineUserMenuItem(data.role || "")
+      this.combineUserMenuItem(data.Role || "")
       this.updateNextUserInformation();
     });
   }
@@ -52,6 +52,9 @@ export class HelperService {
       this.userInformation.ListRoleByUserLogin = [{role: "admin", label: "Quản lí", isSelected: false}, 
       {role: "staff", label: "Nhân viên", isSelected: false}
       , {role: "user", label: "Người dùng", isSelected: true}];
+      if (role === Role.SuperAdmin) {
+        this.userInformation.ListRoleByUserLogin = [...this.userInformation.ListRoleByUserLogin, ...[{role: "super_admin", label: "Super Admin", isSelected: false}]];
+      }
     }
     this.userInformation.ListMenuItem = [...this.userInformation.ListMenuItem, ...Consts.UnusedMenuItem];
   }

@@ -7,6 +7,13 @@
 // START Enums and Input Objects
 //==============================================================
 
+export interface EditUserModel {
+  userId: number;
+  userName: string;
+  roleName: string;
+  phoneNumber?: string | null;
+}
+
 export interface NewUser {
   userName: string;
   email: string;
