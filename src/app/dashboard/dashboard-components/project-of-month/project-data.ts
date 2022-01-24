@@ -1,4 +1,4 @@
-import { saleOverview_GetOverviewUsersSales } from "src/app/services/sale-service/__generated__/saleOverview";
+import { saleOverview_GetOverviewUsersSales } from "src/app/shared/__generated__/saleOverview";
 
 export class  Product implements  saleOverview_GetOverviewUsersSales{
     productClass: string | undefined;

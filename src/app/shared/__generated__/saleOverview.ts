@@ -3,7 +3,7 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { OverviewUserSaleFilter, Pagination } from "./../../../../../__generated__/globalTypes";
+import { OverviewUserSaleFilter, Pagination } from "./../../../../__generated__/globalTypes";
 
 // ====================================================
 // GraphQL query operation: saleOverview

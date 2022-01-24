@@ -23,6 +23,7 @@ export class ListUserComponent implements OnInit {
   error = '';
   staffForm!: FormGroup;
   listRole: any[];
+  userSelected: User = new User;
   constructor(private userService: UserService, 
     private modalService: NgbModal,
     private formBuilder: FormBuilder,
@@ -50,6 +51,27 @@ export class ListUserComponent implements OnInit {
     });
     this.loadListUserData();
   }
+
+  updateSelectedUser(user: User) {
+    this.userSelected = user;
+  }
+
+  selectedUserToDelete(user: User, content: string) {
+    this.userSelected = user;
+    this.openModel(content);
+  }
+  deleteUser() {
+    this.loading = true;
+    this.userService.deleteUser(this.userSelected.id).subscribe(({data}) => {
+      this.loading = false;
+      this.spinnerToast.showToastSuccess("", Consts.TitleSuccess);
+      this.modalService.dismissAll();
+    }, (err) => {
+      this.loading = false;
+      this.spinnerToast.showError("Error", err);
+    })
+  }
+
   get f() { 
     if (!this.staffForm) {
       this.staffForm = this.formBuilder.group({});
@@ -71,7 +93,7 @@ export class ListUserComponent implements OnInit {
     });
     }
   }
-  openModelCreateUser(content:string) {
+  openModel(content:string) {
     this.modalService.open(content, { centered: true, size: 'lg' });
   }
 
@@ -96,7 +118,7 @@ export class ListUserComponent implements OnInit {
     };
     this.userService.createNewUsers(newUserInput).subscribe(({data}) => {
       this.loading = false;
-      this.spinnerToast.showToastSuccess("", "Sucess");
+      this.spinnerToast.showToastSuccess("", Consts.TitleSuccess);
       this.modalService.dismissAll();
     }, (err) => {
       this.loading = false;

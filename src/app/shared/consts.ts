@@ -1,3 +1,5 @@
+import { gql } from "apollo-angular";
+import { DocumentNode } from "graphql";
 import { RouteInfo } from "./sidebar/sidebar.metadata";
 
 export class Consts {
@@ -194,6 +196,7 @@ export class Consts {
       // Title
       public static TitleDelete: string = "Xoá";
       public static TitleEdit: string = "Sửa";
+      public static TitleSuccess: string = "Thành công";
     
 }
 export class TitleManagerStaff {
@@ -205,6 +208,8 @@ export class TitleManagerStaff {
       public TitleCreateNewStaffPassword: string = "Mật khẩu";
       public TitleCreateNewStaffPasswordAgain: string = "Nhập lại mật khẩu";
       public TitleCreateNewStaffPasswordNotMatch: string = "Mật khẩu không giống nhau";
+      public TitleConfirmDeleteUser: string = "Xác nhận";
+      public TitleConfirmDeleteUserContent: string = "Bạn muốn xoá tài khoản";
       public TitleCreateNewStaffErrPasswordReq: string = "Mật khẩu bắt buộc nhập";
       public TitleStaffPhoneNumber: string = "Số điện thoại";
       public TitleStaffRole: string = "Chức vụ";
@@ -214,4 +219,57 @@ export class TitleManagerStaff {
       "Email",
       "Chức vụ", 
       "Trạng thái"];
+      public TitleDelete: string = "Xoá";
+      public TitleCancelled: string = "Huỷ";
+}
+
+export class GraphqlQuery{
+  public static UserMutationDeleteUser: DocumentNode = gql`mutation deleteUser($userId: Int!) {
+    deleteUser(userId: $userId)
+  }`;
+  public static  UserNewUserMutation: DocumentNode = gql`
+    mutation createUser($input:  NewUser!) {
+      createUser(input: $input ) {
+          id
+        }
+      }
+      `;
+  public static AuthMutationLogin: DocumentNode = gql`
+  mutation login($email: String!,$password: String!) {
+    login(email: $email,password: $password ) {
+      id
+      token
+      role
+      userName
+    }
+  }
+`;
+
+  public static AuthQueryGetMe: DocumentNode = gql`query getMe {
+    Me {
+      id
+      role
+      userName
+    }
+  }`;
+  public static UserQueryGetAllUser: DocumentNode = gql`query getAllUsers {
+    GetAllUsers {
+      id
+      Username
+      Email
+      RoleLabel
+      Role
+      Active
+    }
+  }`;
+  public static SaleQueryGetSaleOverview = gql`query saleOverview($fitler: OverviewUserSaleFilter, $page: Pagination) {
+    GetOverviewUsersSales(fitler:  $fitler, page: $page) {
+      UserName
+      UserRole
+      UserEmail
+      TotalSaledProduct
+      EarningMoney
+    }
+  }`;
+
 }

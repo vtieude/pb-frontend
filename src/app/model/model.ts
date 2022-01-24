@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { NewUser, OverviewUserSaleFilter, Pagination } from '__generated__/globalTypes';
-import { saleOverviewVariables } from '../services/sale-service/__generated__/saleOverview';
-import { createUserVariables } from '../services/user-service/__generated__/createUser';
-import { getAllUsers_GetAllUsers } from '../services/user-service/__generated__/getAllUsers';
-import { loginVariables } from '../services/__generated__/login';
+import { createUserVariables } from '../shared/__generated__/createUser';
+import { getAllUsers_GetAllUsers } from '../shared/__generated__/getAllUsers';
+import { loginVariables } from '../shared/__generated__/login';
+import { saleOverviewVariables } from '../shared/__generated__/saleOverview';
 @Injectable()
 export class Todo {
     id: string | undefined;
