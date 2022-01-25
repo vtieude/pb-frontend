@@ -50,6 +50,8 @@ me() {
       this.currentUser.Role = data.Me?.role;
       this.nextCurrentUserLogin()
       this.setUserLogin();
+    }, (err) => {
+      this.logout();
     });
   } 
 }
