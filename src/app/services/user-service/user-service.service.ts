@@ -17,6 +17,7 @@ export class UserService {
   getAllUsers() {
     return this.apollo.watchQuery<getAllUsers>({
       query: GraphqlQuery.UserQueryGetAllUser
+      // pollInterval: 1000,
     }).valueChanges;
   }
   editUser(userEdit: EditUserModel) {

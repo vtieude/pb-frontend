@@ -57,8 +57,8 @@ export class ListUserComponent implements OnInit {
     this.editStaffForm = this.formBuilder.group({
       username: ['', Validators.required],
       role: ['', Validators.required],
-      password: [{value: '******', disabled: true}, Validators.required],
-      email: [{value: '******', disabled: true}, Validators.required],
+      password: [{value: '******', disabled: true}],
+      email: [{value: '******', disabled: true}],
       phoneNumber:['']
     });
     this.loadListUserData();
@@ -90,6 +90,11 @@ export class ListUserComponent implements OnInit {
     })
   }
   onSubmitEditUser() {
+     // stop here if form is invalid
+    if (this.editStaffForm.invalid) {
+      this.submitted = true;
+      return;
+    }
     this.loading = true;
     const input: EditUserModel = {
       userId: this.userSelected.id,
@@ -147,17 +152,28 @@ export class ListUserComponent implements OnInit {
   }
 
   openModel(content:string) {
+    this.submitted = false;
     this.modalService.open(content, { centered: true, size: 'lg' });
   }
 
+  numberOnly(event: any): boolean {
+    const charCode = (event.which) ? event.which : event.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      return false;
+    }
+    return true;
+
+  }
+
   onSubmitCreateUser(event: Event) {
-    this.submitted = true;
     if (this.f.password.value !== this.f.password2.value) {
       this.f.password2.setErrors({pwdNotMatch:true})
+      this.submitted = true;
       return;
     }
     // stop here if form is invalid
     if (this.staffForm.invalid) {
+      this.submitted = true;
         return;
     }
     this.error = "";

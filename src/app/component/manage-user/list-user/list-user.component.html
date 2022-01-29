@@ -37,7 +37,7 @@
               </div>
             </td>
             <td>{{ts.RoleLabel}}</td>
-            <td>{{ts.Active}}</td>
+            <td>{{ts.PhoneNumber}}</td>
             <td>
                 <div class="d-flex align-items-center">
                   <div class="m-r-10">
@@ -100,7 +100,7 @@
               <div class="row">
                 <div class="col-lg-6 col-md-6">
                   <label for="phoneNumber">{{staffTitle.TitleStaffPhoneNumber}}</label>
-                  <input type="number" oninput="this.value=this.value.slice(0,this.maxLength)" formControlName="phoneNumber" class="form-control"  maxlength="15"  />
+                  <input type="text" (keypress)="numberOnly($event)" oninput="this.value=this.value.slice(0,this.maxLength)" formControlName="phoneNumber" class="form-control"  maxlength="15"  />
                 </div>
                 <div class="col-lg-6 col-md-6">
                   <label for="role" class="control-label required-field">{{staffTitle.TitleStaffRole}}</label>
@@ -185,7 +185,7 @@
               <div class="row">
                 <div class="col-lg-6 col-md-6">
                   <label for="phoneNumber">{{staffTitle.TitleStaffPhoneNumber}}</label>
-                  <input type="number" oninput="this.value=this.value.slice(0,this.maxLength)" formControlName="phoneNumber" class="form-control"  maxlength="15"  />
+                  <input (keypress)="numberOnly($event)" type="text" oninput="this.value=this.value.slice(0,this.maxLength)" formControlName="phoneNumber" class="form-control"  maxlength="15"  />
                 </div>
                 <div class="col-lg-6 col-md-6">
                   <label for="role" class="control-label required-field">{{staffTitle.TitleStaffRole}}</label>
