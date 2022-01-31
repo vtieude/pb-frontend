@@ -49,9 +49,9 @@ export class LoginComponent implements OnInit {
         userLogin.Role = data?.login?.role || "";
         userLogin.token = data?.login?.token;
         userLogin.id = data?.login?.id || 0;
+        this.router.navigate([Consts.HomePageNavigation]);
         this.authenticationService.updateUserLoginInformation(userLogin)
         this.authenticationService.setUserLogin();
-        this.router.navigate([Consts.HomePageNavigation]);
         this.loading = false;
 
        }, (error) => {

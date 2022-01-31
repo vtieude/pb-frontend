@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { NewUser, OverviewUserSaleFilter, Pagination } from '__generated__/globalTypes';
 import { createUserVariables } from '../shared/__generated__/createUser';
 import { getAllUsers_GetAllUsers } from '../shared/__generated__/getAllUsers';
+import { getProductForAdmin_GetAllProductsForAdmin } from '../shared/__generated__/getProductForAdmin';
+import { getProductForStaff_GetAllProductsForStaff } from '../shared/__generated__/getProductForStaff';
 import { loginVariables } from '../shared/__generated__/login';
 import { saleOverviewVariables } from '../shared/__generated__/saleOverview';
 @Injectable()
@@ -52,6 +54,17 @@ export class saleFilter implements OverviewUserSaleFilter {
    this.UserName = userName;
    this.DateTime = dateTime;
   }
+}
+
+export class ProductDto implements getProductForAdmin_GetAllProductsForAdmin, getProductForStaff_GetAllProductsForStaff {
+  __typename!: 'ProductDto';
+  id!: number;
+  name!: string | null;
+  category!: string | null;
+  price!: number;
+  sellingPrice!: number;
+  number!: number;
+
 }
 
 export enum Role {

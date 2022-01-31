@@ -16,20 +16,34 @@ import { NgbdtypeheadBasicComponent } from './typehead/typehead.component';
 import { ButtonsComponent } from './buttons/buttons.component';
 import { CardsComponent } from './card/card.component';
 import { ListUserComponent } from './manage-user/list-user/list-user.component';
+import { Consts, RouteTitleNavigationVi } from '../shared/consts';
+import { ListProductComponent } from './manage-product/list-product/list-product.component';
 
 export const ComponentsRoutes: Routes = [
   {
     path: '',
     children: [
       {
-        path: 'manageUser',
+        path: RouteTitleNavigationVi.TitleStaff,
         component: ListUserComponent,
         data: {
-          title: 'Quản lí nhân viên',
+          title: Consts.ManageUser,
           urls: [
             { title: 'Dashboard', url: '/dashboard' },
             { title: 'ngComponent' },
-            { title: 'Quản lí nhân viên' }
+            { title: Consts.ManageUser }
+          ]
+        }
+      },
+      {
+        path: RouteTitleNavigationVi.TitleProduct,
+        component: ListProductComponent,
+        data: {
+          title: Consts.ManageProduct,
+          urls: [
+            { title: 'Dashboard', url: '/dashboard' },
+            { title: 'ngComponent' },
+            { title: Consts.ManageProduct }
           ]
         }
       },

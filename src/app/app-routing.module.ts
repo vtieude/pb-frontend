@@ -3,6 +3,7 @@ import { LoginComponent } from './authentication/login/login.component';
 import { AuthGuard } from './helper/auth.guard';
 
 import { FullComponent } from './layouts/full/full.component';
+import { RouteTitleNavigationVi } from './shared/consts';
 
 export const Approutes: Routes = [
   {
@@ -20,7 +21,7 @@ export const Approutes: Routes = [
         loadChildren: () => import('./starter/starter.module').then(m => m.StarterModule)
       },
       {
-        path: 'component',
+        path: RouteTitleNavigationVi.TitleManage,
         loadChildren: () => import('./component/component.module').then(m => m.ComponentsModule)
       }
     ]

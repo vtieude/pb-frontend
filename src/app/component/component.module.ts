@@ -23,6 +23,7 @@ import { CardsComponent } from './card/card.component';
 import { RouterModule } from '@angular/router';
 import { ListUserComponent } from './manage-user/list-user/list-user.component';
 import { PipesModule } from '../shared/pipe/pipes.module';
+import { ListProductComponent } from './manage-product/list-product/list-product.component';
 
 @NgModule({
   imports: [
@@ -49,7 +50,8 @@ import { PipesModule } from '../shared/pipe/pipes.module';
     NgbdtypeheadBasicComponent,
     ButtonsComponent,
     CardsComponent,
-    ListUserComponent
+    ListUserComponent,
+    ListProductComponent
   ]
 })
 export class ComponentsModule {}

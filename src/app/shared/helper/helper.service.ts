@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Role } from 'src/app/model/model';
 import { AuthService } from 'src/app/services/auth.service';
-import { Consts } from '../consts';
+import { RouteTitleNavigationVi } from '../consts';
 import { RouteInfo } from '../sidebar/sidebar.metadata';
 
 @Injectable({
@@ -28,10 +28,10 @@ export class HelperService {
          return;
        }
       if (data.Role === Role.Admin) {
-        this.userInformation.ListUserDashBoardSalesOffInformation = Consts.AdminListUserSalesOffDashboard;
+        this.userInformation.ListUserDashBoardSalesOffInformation = RouteTitleNavigationVi.AdminListUserSalesOffDashboard;
       }
       if (data.Role === Role.SuperAdmin) {
-        this.userInformation.ListUserDashBoardSalesOffInformation = Consts.SuperAdminListUserSalesOffDashboard;
+        this.userInformation.ListUserDashBoardSalesOffInformation = RouteTitleNavigationVi.SuperAdminListUserSalesOffDashboard;
       }
       this.combineUserMenuItem(data.Role || "")
       this.updateNextUserInformation();
@@ -40,15 +40,15 @@ export class HelperService {
   combineUserMenuItem(role: string) {
     this.userInformation.ListMenuItem = []; 
     if (role === Role.User) {
-      this.userInformation.ListMenuItem = Consts.MenuItemNormalUser;
+      this.userInformation.ListMenuItem = RouteTitleNavigationVi.MenuItemNormalUser;
     }
-    const staffMenuPermission = [ ...Consts.MenuItemNormalUser, ...Consts.MenuItemStaff];
+    const staffMenuPermission = [ ...RouteTitleNavigationVi.MenuItemNormalUser, ...RouteTitleNavigationVi.MenuItemStaff];
     if (role === Role.Staff) {
       this.userInformation.ListMenuItem = staffMenuPermission;
       this.userInformation.ListRoleByUserLogin = [{role: "user", label: "Người dùng", isSelected: true}];
     }
     if (role === Role.SuperAdmin || role === Role.Admin) {
-      this.userInformation.ListMenuItem = [ ...staffMenuPermission, ...Consts.MenuItemSuperAdmin];
+      this.userInformation.ListMenuItem = [ ...staffMenuPermission, ...RouteTitleNavigationVi.MenuItemSuperAdmin];
       this.userInformation.ListRoleByUserLogin = [{role: "admin", label: "Quản lí", isSelected: false}, 
       {role: "staff", label: "Nhân viên", isSelected: false}
       , {role: "user", label: "Người dùng", isSelected: true}];
@@ -56,7 +56,7 @@ export class HelperService {
         this.userInformation.ListRoleByUserLogin = [...this.userInformation.ListRoleByUserLogin, ...[{role: "super_admin", label: "Super Admin", isSelected: false}]];
       }
     }
-    this.userInformation.ListMenuItem = [...this.userInformation.ListMenuItem, ...Consts.UnusedMenuItem];
+    this.userInformation.ListMenuItem = [...this.userInformation.ListMenuItem, ...RouteTitleNavigationVi.UnusedMenuItem];
   }
   resetDataWhenUserLogout() {
     this.userInformation = new UserRoleInformation();
