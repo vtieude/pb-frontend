@@ -71,6 +71,7 @@ export class ListUserComponent implements OnInit {
     this.editControls.phoneNumber.setValue(user.PhoneNumber);
     this.editControls.email.setValue(user.Email);
     this.setValueRoleEditFormControl(user.Role || "");
+    this.editStaffForm.updateValueAndValidity();
     this.openModel(content);
   }
 
@@ -93,6 +94,7 @@ export class ListUserComponent implements OnInit {
      // stop here if form is invalid
     if (this.editStaffForm.invalid) {
       this.submitted = true;
+      console.log(this.editStaffForm)
       return;
     }
     this.loading = true;

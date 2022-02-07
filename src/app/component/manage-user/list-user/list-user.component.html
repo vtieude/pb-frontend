@@ -145,7 +145,7 @@
     </ng-template>
     <ng-template #editUserContent let-modal>
       <div class="modal-header">
-        <h4 class="modal-title">{{staffTitle.TitleCreateNewStaff}}</h4>
+        <h4 class="modal-title">{{staffTitle.TitleEditStaff}}</h4>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -164,9 +164,9 @@
                 <div class="col-lg-6 col-md-6">
                   <label for="email" class="control-label required-field">Email</label>
                   <input type="text" formControlName="email"  class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
-                  <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                  <!-- <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
                       <div *ngIf="f.email.errors.required">{{staffTitle.TitleStaffErrorEmailRequired}}</div>
-                  </div>
+                  </div> -->
                 </div>
               </div>
             </div>
@@ -175,9 +175,9 @@
                 <div class="col-lg-6 col-md-6">
                   <label for="password"  class="control-label required-field" >{{staffTitle.TitleCreateNewStaffPassword}}</label>
                   <input type="text" formControlName="password"  class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
-                  <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                  <!-- <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
                       <div *ngIf="f.password.errors.required">{{staffTitle.TitleCreateNewStaffErrPasswordReq}}</div>
-                  </div>
+                  </div> -->
                 </div>
               </div>
             </div>
@@ -193,9 +193,9 @@
                     <select class="form-control" formControlName="role" [ngClass]="{ 'is-invalid': submitted && f.role.errors }">
                       <option *ngFor='let ts of editListRole'  [value]="ts.role" [selected]="ts.isSelected">{{ts.label}}</option>
                     </select>
-                    <div *ngIf="submitted && f.role.errors" class="invalid-feedback">
+                    <!-- <div *ngIf="submitted && f.role.errors" class="invalid-feedback">
                       <div *ngIf="f.role.errors.required">Role is required</div>
-                    </div>
+                    </div> -->
                   </div>
                  
                 </div>

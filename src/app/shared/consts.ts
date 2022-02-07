@@ -235,6 +235,7 @@ export class TitleManagerStaff {
       public TitleStaffPhoneNumber: string = "Số điện thoại";
       public TitleStaffRole: string = "Chức vụ";
       public TitleCreateNewStaff: string = "Tạo mới nhân viên";
+      public TitleEditStaff: string = "Chỉnh sửa thông tin nhân viên";
       public TitleListStaff: string = "Danh sách nhân viên";
       public TitleTableColumnsListStaff: string[] = [ "Tên Nhân Viên",
       "Email",
