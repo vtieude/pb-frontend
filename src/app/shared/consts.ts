@@ -6,9 +6,10 @@ export class RouteTitleNavigationVi {
   public static TitleManage: string = "quan-li";
   public static TitleStaff: string = "nhan-vien";
   public static TitleProduct: string = "san-pham";
+  public static TitleAddProduct: string = "tao-moi-san-pham";
   public static TitleManageUser: string = "/" + RouteTitleNavigationVi.TitleManage + "/" + RouteTitleNavigationVi.TitleStaff;
   public static TitleManageProduct: string = "/" + RouteTitleNavigationVi.TitleManage + "/" + RouteTitleNavigationVi.TitleProduct;
-
+  public static TitleManageAddProduct: string = "/" + RouteTitleNavigationVi.TitleManage + "/" + RouteTitleNavigationVi.TitleAddProduct;
    // Dash board List Sales off User view
    public static SuperAdminListUserSalesOffDashboard : string[] = [
     "Name User",
@@ -213,9 +214,12 @@ export class Consts {
     // Title
     public static TitleDelete: string = "Xoá";
     public static TitleEdit: string = "Sửa";
+    public static TitleCancel: string = "Huỷ";
     public static TitleSuccess: string = "Thành công";
     public static ManageUser =  "Quản lí nhân viên";
     public static ManageProduct =  "Quản lí sản phẩm";
+    public static ManageAddProduct =  "Tạo mới sản phẩm";
+    public static ConfirmCancel = "Bạn muốn huỷ?"
     
 }
 
@@ -247,21 +251,17 @@ export class TitleManagerStaff {
 
 export class TitleManagerProduct {
   public TitleCreateNew: string = "Tạo mới";
-  public TitleStaffConfirm: string = "Tạo mới";
-  public TitleStaffEditBtn: string = "Sửa";
-  public TitleStaffUserName: string = "Tên nhân viên";
-  public TitleStaffErrorUserNameRequired: string = "Tên nhân viên bắt buộc nhập";
-  public TitleStaffErrorEmailRequired: string = "Email bắt buộc nhập";
-  public TitleCreateNewStaffPassword: string = "Mật khẩu";
-  public TitleCreateNewStaffPasswordAgain: string = "Nhập lại mật khẩu";
-  public TitleCreateNewStaffPasswordNotMatch: string = "Mật khẩu không giống nhau";
-  public TitleConfirmDeleteUser: string = "Xác nhận";
-  public TitleConfirmDeleteUserContent: string = "Bạn muốn xoá tài khoản";
-  public TitleCreateNewStaffErrPasswordReq: string = "Mật khẩu bắt buộc nhập";
-  public TitleStaffPhoneNumber: string = "Số điện thoại";
-  public TitleStaffRole: string = "Chức vụ";
-  public TitleCreateNewStaff: string = "Tạo mới nhân viên";
+  public TitleProductConfirm: string = "Tạo mới";
+  public TitleProductEditBtn: string = "Sửa";
+  public TitleProductProductName: string = "Tên sản phẩm";
+  public TitleProductCategory: string = "Loại sản phẩm";
+  public TitleCreateNewProduct: string = "Tạo mới sản phẩm";
   public TitleManageListProduct: string = "Danh sách sản phẩm";
+  public TitleProductPrice: string  = "Giá mua vào (VND)";
+  public TitleProductFieldRequiredErr = "Yêu cầu nhập";
+  public TitleProductSellingPrice: string = "Giá bán ra (VND)";
+  public TitleProductDescription: string = "Mô tả";
+  public TitleTotalProduct: string = "Số lượng sản phẩm"
   public TitleTableColumnsListProduct: string[] = [ "Tên sản phẩm",
   "Lọai sản phẩm",
   "Nhà cung cấp",

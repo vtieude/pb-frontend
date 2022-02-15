@@ -1,0 +1,80 @@
+<div class="card">
+    <div class="card-body">
+      <form [formGroup]="addProductForm" (submit)="onSubmitCreateProduct()">
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-6 col-md-6">
+                <label class="control-label required-field" for="productname">{{productTitle.TitleProductProductName}}</label>
+                <input type="text" formControlName="productname" class="form-control" 
+                [ngClass]="{ 'is-invalid': submitted && f.productname.errors }"/>
+                <div *ngIf="submitted && f.productname.errors" class="invalid-feedback">
+                    <div *ngIf="f.productname.errors.required">{{productTitle.TitleProductFieldRequiredErr}}</div>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6">
+                <label for="category" class="control-label required-field">{{productTitle.TitleProductCategory}}</label>
+                <input type="text" formControlName="category" class="form-control" 
+                [ngClass]="{ 'is-invalid': submitted && f.category.errors }" />
+                <div *ngIf="submitted && f.category.errors" class="invalid-feedback">
+                    <div *ngIf="f.category.errors.required">{{productTitle.TitleProductFieldRequiredErr}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-6 col-md-6">
+                <label class="control-label required-field" for="price">{{productTitle.TitleProductPrice}}</label>
+                <input type="text" formControlName="price" class="form-control" 
+                [ngClass]="{ 'is-invalid': submitted && f.price.errors }"/>
+                <div *ngIf="submitted && f.price.errors" class="invalid-feedback">
+                    <div *ngIf="f.price.errors.required">{{productTitle.TitleProductFieldRequiredErr}}</div>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6">
+                <label for="category" class="control-label required-field">{{productTitle.TitleProductSellingPrice}}</label>
+                <input type="text" formControlName="sellingprice" class="form-control" 
+                [ngClass]="{ 'is-invalid': submitted && f.sellingprice.errors }" />
+                <div *ngIf="submitted && f.sellingprice.errors" class="invalid-feedback">
+                    <div *ngIf="f.sellingprice.errors.required">{{productTitle.TitleProductFieldRequiredErr}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-6 col-md-6">
+                <label class="control-label required-field" for="price">{{productTitle.TitleProductDescription}}</label>
+                <input type="text" formControlName="description" class="form-control" 
+                [ngClass]="{ 'is-invalid': submitted && f.productprice.errors }"/>
+              </div>
+              <div class="col-lg-6 col-md-6">
+                <label for="category" class="control-label required-field">{{productTitle.TitleTotalProduct}}</label>
+                <input type="text" formControlName="totalproduct" class="form-control" 
+                [ngClass]="{ 'is-invalid': submitted && f.totalproduct.errors }" />
+                <div *ngIf="submitted && f.totalproduct.errors" class="invalid-feedback">
+                    <div *ngIf="f.totalproduct.errors.required">{{productTitle.TitleProductFieldRequiredErr}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="row button-group button-confirm-form">
+            <div class="col-lg-2 col-md-4 ">
+                <button [disabled]="loading" type="button" (click)="onCancelCreateProduct()"  
+                    class="btn btn-rounded btn-block btn-outline-secondary">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    {{constant.TitleCancel}}
+                </button>
+            </div>
+            <div class="col-lg-2 col-md-4">
+                <button [disabled]="loading" type="button" (click)="onSubmitCreateProduct()" 
+                 class="btn btn-rounded btn-block btn-outline-primary">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    {{productTitle.TitleProductConfirm}}
+                </button>
+            </div>
+        </div>
+      </form>
+  </div>
+</div>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductDto } from 'src/app/model/model';
 import { ProductService } from 'src/app/services/product-service/product.service';
-import { TitleManagerProduct } from 'src/app/shared/consts';
+import { RouteTitleNavigationVi, TitleManagerProduct } from 'src/app/shared/consts';
 
 @Component({
   selector: 'app-list-product',
@@ -11,6 +11,7 @@ import { TitleManagerProduct } from 'src/app/shared/consts';
 export class ListProductComponent implements OnInit {
   productTitle = new TitleManagerProduct;
   listProductsInformation: ProductDto[] = [];
+  addNewProductUtl = RouteTitleNavigationVi.TitleManageAddProduct
   constructor(private productService: ProductService) { }
 
   ngOnInit(): void {

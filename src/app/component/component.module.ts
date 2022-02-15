@@ -24,6 +24,7 @@ import { RouterModule } from '@angular/router';
 import { ListUserComponent } from './manage-user/list-user/list-user.component';
 import { PipesModule } from '../shared/pipe/pipes.module';
 import { ListProductComponent } from './manage-product/list-product/list-product.component';
+import { AddProductComponent } from './manage-product/addProduct/add-product/add-product.component';
 
 @NgModule({
   imports: [
@@ -51,7 +52,8 @@ import { ListProductComponent } from './manage-product/list-product/list-product
     ButtonsComponent,
     CardsComponent,
     ListUserComponent,
-    ListProductComponent
+    ListProductComponent,
+    AddProductComponent
   ]
 })
 export class ComponentsModule {}

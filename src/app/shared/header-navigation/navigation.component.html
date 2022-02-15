@@ -20,12 +20,12 @@
 <ul class="navbar-nav float-right">
     <li class="mr-2" *ngIf="!isLoggin">
 		<div class="">
-        	<a routerLink="/login" class="btn btn-dark text-white ml-3">Login</a>
+        	<a routerLink="/login" class="btn btn-dark text-white ml-3">Đăng nhập</a>
 		</div>
     </li>
     <li class="mr-2" *ngIf="isLoggin">
 		<div class="">
-            <a routerLink="/" (click)="logOut()" class="btn btn-dark text-white ml-3">Logout</a>
+            <a routerLink="/" (click)="logOut()" class="btn btn-dark text-white ml-3">Thoát</a>
 		</div>
     </li>
 </ul>
