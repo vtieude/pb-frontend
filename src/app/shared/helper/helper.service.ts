@@ -27,6 +27,7 @@ export class HelperService {
          this.updateNextUserInformation();
          return;
        }
+      this.userInformation.UserRole = data.Role;
       if (data.Role === Role.Admin) {
         this.userInformation.ListUserDashBoardSalesOffInformation = RouteTitleNavigationVi.AdminListUserSalesOffDashboard;
       }
@@ -67,4 +68,5 @@ export class UserRoleInformation {
   ListUserDashBoardSalesOffInformation!: string[];
   ListMenuItem!: RouteInfo[];
   ListRoleByUserLogin: any[] = [];
+  UserRole!: string;
 }

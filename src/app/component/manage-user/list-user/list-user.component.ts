@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { User } from 'src/app/model/model';
+import { Role, User } from 'src/app/model/model';
 import { UserService } from 'src/app/services/user-service/user-service.service';
 import { Consts, TitleManagerStaff } from 'src/app/shared/consts';
 import { HelperService } from 'src/app/shared/helper/helper.service';
@@ -39,7 +39,10 @@ export class ListUserComponent implements OnInit {
     this.helper.userInformationSubject.subscribe(data => {
       if (!!data) {
         this.listRole = data.ListRoleByUserLogin;
-        this.editListRole = data.ListRoleByUserLogin
+        this.editListRole = data.ListRoleByUserLogin;
+        if (this.editStaffForm != null && data.UserRole == Role.SuperAdmin) {
+          this.editControls.password.enable();
+        }
       } else {
         this.listRole = [];
         this.editListRole = [];
@@ -57,12 +60,16 @@ export class ListUserComponent implements OnInit {
     this.editStaffForm = this.formBuilder.group({
       username: ['', Validators.required],
       role: ['', Validators.required],
-      password: [{value: '******', disabled: true}],
+      password: ['******'],
       email: [{value: '******', disabled: true}],
       phoneNumber:['']
     });
+    if (this.helper.userInformation?.UserRole != Role.SuperAdmin) {
+      this.editControls.password.disable();
+    }
     this.loadListUserData();
   }
+
 
   selectedUserToEdit(user: User, content: string) {
     this.userSelected = user;
@@ -70,6 +77,9 @@ export class ListUserComponent implements OnInit {
     this.editControls.role.setValue(user.Role);
     this.editControls.phoneNumber.setValue(user.PhoneNumber);
     this.editControls.email.setValue(user.Email);
+    if (this.helper.userInformation?.UserRole == Role.SuperAdmin) {
+      this.editControls.password.setValue("");
+    }
     this.setValueRoleEditFormControl(user.Role || "");
     this.editStaffForm.updateValueAndValidity();
     this.openModel(content);
@@ -94,7 +104,6 @@ export class ListUserComponent implements OnInit {
      // stop here if form is invalid
     if (this.editStaffForm.invalid) {
       this.submitted = true;
-      console.log(this.editStaffForm)
       return;
     }
     this.loading = true;
@@ -103,6 +112,9 @@ export class ListUserComponent implements OnInit {
       userName: this.editControls.username.value,
       roleName: this.editControls.role.value,
       phoneNumber: this.editControls.phoneNumber.value?.toString()
+    }
+    if (this.helper.userInformation?.UserRole == Role.SuperAdmin && this.editControls.password.value != '') {
+      input.password = this.editControls.password.value.toString()
     }
     this.userService.editUser(input).subscribe(({data}) => {
       this.loading = false;

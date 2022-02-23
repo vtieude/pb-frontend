@@ -12,6 +12,7 @@ export interface EditUserModel {
   userName: string;
   roleName: string;
   phoneNumber?: string | null;
+  password?: string | null;
 }
 
 export interface NewUser {
