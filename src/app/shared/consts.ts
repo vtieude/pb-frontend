@@ -7,6 +7,10 @@ export class RouteTitleNavigationVi {
   public static TitleStaff: string = "nhan-vien";
   public static TitleProduct: string = "san-pham";
   public static TitleAddProduct: string = "tao-moi-san-pham";
+  public static TitleProfile: string = "thong-tin-ca-nhan";
+  public static TitleSale: string = "ban-hang";
+  public static TitleManageSale: string = "/" + RouteTitleNavigationVi.TitleManage + "/" + RouteTitleNavigationVi.TitleSale;
+  public static TitleManageProfile: string = "/" + RouteTitleNavigationVi.TitleManage + "/" + RouteTitleNavigationVi.TitleProfile;
   public static TitleManageUser: string = "/" + RouteTitleNavigationVi.TitleManage + "/" + RouteTitleNavigationVi.TitleStaff;
   public static TitleManageProduct: string = "/" + RouteTitleNavigationVi.TitleManage + "/" + RouteTitleNavigationVi.TitleProduct;
   public static TitleManageAddProduct: string = "/" + RouteTitleNavigationVi.TitleManage + "/" + RouteTitleNavigationVi.TitleAddProduct;
@@ -55,18 +59,18 @@ export class RouteTitleNavigationVi {
           submenu: []
         },
         {
-          path: '',
+          path: RouteTitleNavigationVi.TitleManageProfile,
           title: 'Quản Lí Cá Nhân',
           icon: 'mdi mdi-dots-horizontal',
-          class: 'nav-small-cap',
+          class: '',
           extralink: false,
           submenu: []
         },
         {
-          path: '',
+          path: RouteTitleNavigationVi.TitleManageSale,
           title: 'Quản lí bán hàng',
-          icon: 'mdi mdi-dots-horizontal',
-          class: 'nav-small-cap',
+          icon: 'mdi mdi-message-bulleted',
+          class: '',
           extralink: false,
           submenu: []
         },
@@ -76,7 +80,7 @@ export class RouteTitleNavigationVi {
       {
           path: RouteTitleNavigationVi.TitleManageUser,
           title: 'Quản lí nhân viên',
-          icon: 'mdi mdi-equal',
+          icon: 'mdi mdi-view-carousel',
           class: '',
           extralink: false,
           submenu: []
@@ -92,7 +96,7 @@ export class RouteTitleNavigationVi {
       {
         path: '',
         title: 'Báo cáo doanh số',
-        icon: 'mdi mdi-dots-horizontal',
+        icon: 'mdi mdi-poll',
         class: 'nav-small-cap',
         extralink: false,
         submenu: []
@@ -219,6 +223,8 @@ export class Consts {
     public static ManageUser =  "Quản lí nhân viên";
     public static ManageProduct =  "Quản lí sản phẩm";
     public static ManageAddProduct =  "Tạo mới sản phẩm";
+    public static ManageProfile =  "Quản lí cá nhân";
+    public static ManageSale =  "Quản lí bán hàng";
     public static ConfirmCancel = "Bạn muốn huỷ?"
     
 }
@@ -247,6 +253,18 @@ export class TitleManagerStaff {
       "Số điện thoại"];
       public TitleDelete: string = "Xoá";
       public TitleCancelled: string = "Huỷ";
+}
+export class TitleManagerProfile {
+  public TitleProfile: string = "Thông tin cá nhân";
+  public TitleStaffUserName: string = "Tên nhân viên";
+  public TitleCreateNewStaffPassword: string = "Mật khẩu";
+  public TitleCreateNewStaffPasswordAgain: string = "Nhập lại mật khẩu";
+  public TitleStaffPhoneNumber: string = "Số điện thoại";
+  public TitleStaffRole: string = "Chức vụ";
+  public TitleStaffEditBtn: string = "Sửa";
+  public TitleCreateNewStaffPasswordNotMatch: string = "Mật khẩu không giống nhau";
+  public TitleCreateNewStaffErrPasswordReq: string = "Mật khẩu bắt buộc nhập";
+  public TitleStaffErrorUserNameRequired: string = "Tên nhân viên bắt buộc nhập";
 }
 
 export class TitleManagerProduct {
@@ -278,6 +296,13 @@ export class GraphqlQuery{
       id
     }
   }`;
+
+  public static UserMutationEditProfile = gql`mutation editProfile($input:  EditUserModel!){
+    editProfile(input: $input) {
+      id
+    }
+  }`;
+
   public static UserMutationDeleteUser: DocumentNode = gql`mutation deleteUser($userId: Int!) {
     deleteUser(userId: $userId)
   }`;
@@ -317,6 +342,19 @@ export class GraphqlQuery{
       PhoneNumber
     }
   }`;
+
+  public static UserQueryGetProfile: DocumentNode = gql`query getProfile {
+    GetProfile {
+      id
+      Username
+      Email
+      RoleLabel
+      Role
+      Active
+      PhoneNumber
+    }
+  }`;
+
   public static SaleQueryGetSaleOverview = gql`query saleOverview($fitler: OverviewUserSaleFilter, $page: Pagination) {
     GetOverviewUsersSales(fitler:  $fitler, page: $page) {
       UserName
