@@ -14,6 +14,17 @@ export interface EditUserModel {
   phoneNumber?: string | null;
 }
 
+export interface NewProduct {
+  name: string;
+  key: string;
+  category?: string | null;
+  price: number;
+  sellingPrice: number;
+  number: number;
+  description?: string | null;
+  imageURL?: string | null;
+}
+
 export interface NewUser {
   userName: string;
   email: string;

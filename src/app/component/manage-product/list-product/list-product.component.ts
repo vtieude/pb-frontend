@@ -18,9 +18,9 @@ export class ListProductComponent implements OnInit {
     this.getAllProductForAdmin();
   }
   getAllProductForAdmin(){
-    this.productService.getAllProductForAdmin().subscribe(({data}) => {
-      if (!!data && !!data.GetAllProductsForAdmin) {
-        data.GetAllProductsForAdmin.forEach(element => {
+    this.productService.getAllProduct().subscribe(({data}) => {
+      if (!!data && !!data.GetAllProducts) {
+        data.GetAllProducts.forEach(element => {
            this.listProductsInformation.push(element as unknown as ProductDto );
         });
       }

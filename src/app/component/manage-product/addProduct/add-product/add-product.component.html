@@ -12,12 +12,29 @@
                 </div>
               </div>
               <div class="col-lg-6 col-md-6">
+                <label for="productkey" class="control-label required-field">{{productTitle.TitleProductKey}}</label>
+                <input type="text" formControlName="productkey" class="form-control" 
+                [ngClass]="{ 'is-invalid': submitted && f.productkey.errors }" />
+                <div *ngIf="submitted && f.productkey.errors" class="invalid-feedback">
+                    <div *ngIf="f.productkey.errors.required">{{productTitle.TitleProductFieldRequiredErr}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-6 col-md-6">
                 <label for="category" class="control-label required-field">{{productTitle.TitleProductCategory}}</label>
                 <input type="text" formControlName="category" class="form-control" 
                 [ngClass]="{ 'is-invalid': submitted && f.category.errors }" />
                 <div *ngIf="submitted && f.category.errors" class="invalid-feedback">
                     <div *ngIf="f.category.errors.required">{{productTitle.TitleProductFieldRequiredErr}}</div>
                 </div>
+              </div>
+              <div class="col-lg-6 col-md-6">
+                <label class="control-label required-field" for="price">{{productTitle.TitleProductDescription}}</label>
+                <input type="text" formControlName="description" class="form-control" 
+                [ngClass]="{ 'is-invalid': submitted && f.productprice.errors }"/>
               </div>
             </div>
           </div>
@@ -44,11 +61,6 @@
           <div class="form-group">
             <div class="row">
               <div class="col-lg-6 col-md-6">
-                <label class="control-label required-field" for="price">{{productTitle.TitleProductDescription}}</label>
-                <input type="text" formControlName="description" class="form-control" 
-                [ngClass]="{ 'is-invalid': submitted && f.productprice.errors }"/>
-              </div>
-              <div class="col-lg-6 col-md-6">
                 <label for="category" class="control-label required-field">{{productTitle.TitleTotalProduct}}</label>
                 <input type="text" formControlName="totalproduct" class="form-control" 
                 [ngClass]="{ 'is-invalid': submitted && f.totalproduct.errors }" />
@@ -58,7 +70,6 @@
               </div>
             </div>
           </div>
-          
           <div class="row button-group button-confirm-form">
             <div class="col-lg-2 col-md-4 ">
                 <button [disabled]="loading" type="button" (click)="onCancelCreateProduct()"  

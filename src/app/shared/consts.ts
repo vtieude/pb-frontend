@@ -255,6 +255,7 @@ export class TitleManagerProduct {
   public TitleProductEditBtn: string = "Sửa";
   public TitleProductProductName: string = "Tên sản phẩm";
   public TitleProductCategory: string = "Loại sản phẩm";
+  public TitleProductKey: string = "Mã sản phẩm";
   public TitleCreateNewProduct: string = "Tạo mới sản phẩm";
   public TitleManageListProduct: string = "Danh sách sản phẩm";
   public TitleProductPrice: string  = "Giá mua vào (VND)";
@@ -289,8 +290,8 @@ export class GraphqlQuery{
       }
       `;
   public static AuthMutationLogin: DocumentNode = gql`
-  mutation login($email: String!,$password: String!) {
-    login(email: $email,password: $password ) {
+  mutation login($email: String!, $password: String!) {
+    login(email: $email, password: $password ) {
       id
       token
       role
@@ -328,9 +329,10 @@ export class GraphqlQuery{
   }`;
 
   // Product
-  public static ProductQueryGetAllProductForAdmin = gql`
-  query getProductForAdmin {
-    GetAllProductsForAdmin{
+ 
+  public static ProductQueryGetAllProducts = gql`
+  query getProducts {
+    GetAllProducts{
       id
       name
       category
@@ -340,17 +342,12 @@ export class GraphqlQuery{
       
     }
   }`;
-  public static ProductQueryGetAllProductForStaff = gql`
-  query getProductForStaff {
-    GetAllProductsForStaff{
+  public static ProductMutationCreateNew: DocumentNode = gql`
+  mutation createProduct($input:  NewProduct!) {
+    login(input: $input) {
       id
-      name
-      category
-      price
-      sellingPrice
-      number
-      
     }
-  }`;
+  }
+`;
 
 }
