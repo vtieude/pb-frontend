@@ -25,6 +25,8 @@ import { ListUserComponent } from './manage-user/list-user/list-user.component';
 import { PipesModule } from '../shared/pipe/pipes.module';
 import { ListProductComponent } from './manage-product/list-product/list-product.component';
 import { AddProductComponent } from './manage-product/addProduct/add-product/add-product.component';
+import { ProfileComponent } from './profile/profile/profile.component';
+import { ManageSaleComponent } from './manage-sale/manage-sale/manage-sale.component';
 
 @NgModule({
   imports: [
@@ -53,7 +55,9 @@ import { AddProductComponent } from './manage-product/addProduct/add-product/add
     CardsComponent,
     ListUserComponent,
     ListProductComponent,
-    AddProductComponent
+    AddProductComponent,
+    ProfileComponent,
+    ManageSaleComponent
   ]
 })
 export class ComponentsModule {}

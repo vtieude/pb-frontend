@@ -6,6 +6,7 @@ import { GraphqlQuery } from 'src/app/shared/consts';
 import { deleteUserVariables } from 'src/app/shared/__generated__/deleteUser';
 import { editUserVariables } from 'src/app/shared/__generated__/editUser';
 import { getAllUsers } from 'src/app/shared/__generated__/getAllUsers';
+import { getProfile } from 'src/app/shared/__generated__/getProfile';
 import { EditUserModel, NewUser } from '__generated__/globalTypes';
 
 @Injectable({
@@ -20,6 +21,24 @@ export class UserService {
       // pollInterval: 1000,
     }).valueChanges;
   }
+
+  getProfile() {
+    return this.apollo.watchQuery<getProfile>({
+      query: GraphqlQuery.UserQueryGetProfile
+      // pollInterval: 1000,
+    }).valueChanges;
+  }
+  editProfile(userEdit: EditUserModel) {
+    const letVariable:editUserVariables  = {
+      input : userEdit
+    }
+    return this.apollo.mutate<User>({
+      mutation: GraphqlQuery.UserMutationEditProfile,
+      variables: letVariable,
+      refetchQueries:[{query: GraphqlQuery.UserQueryGetProfile}]
+    });
+  }
+
   editUser(userEdit: EditUserModel) {
     const letVariable:editUserVariables  = {
       input : userEdit
