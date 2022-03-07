@@ -59,7 +59,7 @@ export class AddProductComponent implements OnInit {
       this.router.navigate([RouteTitleNavigationVi.TitleManageProduct]);
     }, (err) => {
       this.loading = false;
-      this.spinnerToast.showError("Error", err);
+      this.spinnerToast.showError("Error", "");
     })
     this.loading = false;
 

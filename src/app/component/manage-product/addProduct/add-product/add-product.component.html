@@ -62,7 +62,7 @@
             <div class="row">
               <div class="col-lg-6 col-md-6">
                 <label for="category" class="control-label required-field">{{productTitle.TitleTotalProduct}}</label>
-                <input type="text" formControlName="totalproduct" class="form-control" 
+                <input type="number" formControlName="totalproduct" class="form-control" 
                 [ngClass]="{ 'is-invalid': submitted && f.totalproduct.errors }" />
                 <div *ngIf="submitted && f.totalproduct.errors" class="invalid-feedback">
                     <div *ngIf="f.totalproduct.errors.required">{{productTitle.TitleProductFieldRequiredErr}}</div>

@@ -382,7 +382,7 @@ export class GraphqlQuery{
   }`;
   public static ProductMutationCreateNew: DocumentNode = gql`
   mutation createProduct($input:  NewProduct!) {
-    login(input: $input) {
+    createNewProduct(input: $input) {
       id
     }
   }
