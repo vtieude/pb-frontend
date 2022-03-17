@@ -15,6 +15,7 @@ export class AddProductComponent implements OnInit {
   addProductForm!: FormGroup;
   submitted = false;
   loading =false ;
+  display!: string;
   constant = Consts;
   constructor(private formBuilder: FormBuilder,
     private service: ProductService,
@@ -38,6 +39,37 @@ export class AddProductComponent implements OnInit {
     }
     return this.addProductForm.controls; 
   }
+  numberOnly(event:any): boolean {
+    const charCode = (event.which) ? event.which : event.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      return false;
+    }
+    return true;
+
+  }
+  eventNumberChange(event:any) {
+    if (event) {
+        this.display = this.format_number(event);
+    }
+  }
+  format_number(number: string, ...prefix: any) {
+    let thousand_separator = ',',
+      decimal_separator = '.',
+      regex = new RegExp('[^' + decimal_separator + '\\d]', 'g'),
+      number_string = number.replace(regex, '').toString(),
+      split = number_string.split(decimal_separator),
+      rest = split[0].length % 3,
+      result = split[0].substr(0, rest),
+      thousands = split[0].substr(rest).match(/\d{3}/g);
+
+    if (thousands) {
+      let separator = rest ? thousand_separator : '';
+      result += separator + thousands.join(thousand_separator);
+    }
+    result = split[1] != undefined ? result + decimal_separator + split[1] : result;
+    return prefix == undefined ? result : (result ? prefix + result : '');
+  };
+  
   onSubmitCreateProduct() {
     this.submitted = true;
     if (!this.addProductForm.valid) {

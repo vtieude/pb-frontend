@@ -34,8 +34,8 @@
               </div>
             </td>
             <td>-</td>
-            <td>{{ts.price}}</td>
-            <td>{{ts.sellingPrice}}</td>
+            <td>{{ts.price * 1000 | number:'.0-0'}} VND</td>
+            <td>{{ts.sellingPrice * 1000| number:'.0-0'}} VND</td>
             <td>{{ts.number}}</td>
             <td>
                 <div class="d-flex align-items-center">
