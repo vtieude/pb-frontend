@@ -34,7 +34,7 @@
               <div class="col-lg-6 col-md-6">
                 <label class="control-label required-field" for="price">{{productTitle.TitleProductDescription}}</label>
                 <input type="text" formControlName="description" class="form-control" 
-                [ngClass]="{ 'is-invalid': submitted && f.productprice.errors }"/>
+                [ngClass]="{ 'is-invalid': submitted && f.description.errors }"/>
               </div>
             </div>
           </div>
@@ -43,19 +43,27 @@
               <div class="col-lg-6 col-md-6">
                 <label class="control-label required-field" for="price">{{productTitle.TitleProductPrice}}</label>
                 <input type="text" (keypress)="numberOnly($event)"  formControlName="price"  
-                [(ngModel)]="display" (ngModelChange)="eventNumberChange($event)" class="form-control" 
+                [(ngModel)]="priceDisplay" (ngModelChange)="eventPriceChange($event)" class="form-control" 
                 [ngClass]="{ 'is-invalid': submitted && f.price.errors }"/>
                 <div *ngIf="submitted && f.price.errors" class="invalid-feedback">
                     <div *ngIf="f.price.errors.required">{{productTitle.TitleProductFieldRequiredErr}}</div>
                 </div>
+                <div *ngIf="submitted && f.price.errors" class="invalid-feedback">
+                  <div *ngIf="f.price.errors.maxPriceError">{{productTitle.TitleMaxProductPrice}}</div>
+              </div>
               </div>
               <div class="col-lg-6 col-md-6">
                 <label for="category" class="control-label required-field">{{productTitle.TitleProductSellingPrice}}</label>
-                <input type="text" formControlName="sellingprice" class="form-control" 
+                <input type="text"  (keypress)="numberOnly($event)" 
+                   formControlName="sellingprice" class="form-control" 
+                   [(ngModel)]="priceSellingDisplay" (ngModelChange)="eventSellingPriceChange($event)"
                 [ngClass]="{ 'is-invalid': submitted && f.sellingprice.errors }" />
                 <div *ngIf="submitted && f.sellingprice.errors" class="invalid-feedback">
                     <div *ngIf="f.sellingprice.errors.required">{{productTitle.TitleProductFieldRequiredErr}}</div>
                 </div>
+                <div *ngIf="submitted && f.sellingprice.errors" class="invalid-feedback">
+                  <div *ngIf="f.sellingprice.errors.maxPriceError">{{productTitle.TitleMaxProductPrice}}</div>
+              </div>
               </div>
             </div>
           </div>

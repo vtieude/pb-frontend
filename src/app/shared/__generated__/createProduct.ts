@@ -9,13 +9,13 @@ import { NewProduct } from "./../../../../__generated__/globalTypes";
 // GraphQL mutation operation: createProduct
 // ====================================================
 
-export interface createProduct_login {
-  __typename: "UserDto";
+export interface createProduct_createNewProduct {
+  __typename: "ProductDto";
   id: number;
 }
 
 export interface createProduct {
-  login: createProduct_login;
+  createNewProduct: createProduct_createNewProduct;
 }
 
 export interface createProductVariables {

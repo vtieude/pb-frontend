@@ -34,15 +34,15 @@
               </div>
             </td>
             <td>-</td>
-            <td>{{ts.price * 1000 | number:'.0-0'}} VND</td>
-            <td>{{ts.sellingPrice * 1000| number:'.0-0'}} VND</td>
+            <td>{{ts.price | number:'.0-0'}} VND</td>
+            <td>{{ts.sellingPrice | number:'.0-0'}} VND</td>
             <td>{{ts.number}}</td>
             <td>
                 <div class="d-flex align-items-center">
                   <div class="m-r-10">
-                    <button type="button" ngbTooltip="{{btnEdit}}" class="btn btn-circle " (click)="selectedUserToEdit(ts, editUserContent)"><i class="fas fa-edit"></i></button>
+                    <button type="button" ngbTooltip="{{btnEdit}}" class="btn btn-circle " (click)="editProduct(ts)"><i class="fas fa-edit"></i></button>
                   </div>
-                  <button type="button" ngbTooltip="{{btnDelete}}" class="btn btn-circle " (click)="selectedUserToDelete(ts, confirmDeleteUser)"> <i class="fas fas fa-trash"></i></button>
+                  <button type="button" ngbTooltip="{{btnDelete}}" class="btn btn-circle " (click)="deleteProduct(ts)"> <i class="fas fas fa-trash"></i></button>
                 </div>
             </td>
           </tr>

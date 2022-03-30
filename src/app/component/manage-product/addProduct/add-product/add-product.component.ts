@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Consts, RouteTitleNavigationVi, TitleManagerProduct } from 'src/app/shared/consts';
 import { ProductService } from 'src/app/services/product-service/product.service';
@@ -15,8 +15,10 @@ export class AddProductComponent implements OnInit {
   addProductForm!: FormGroup;
   submitted = false;
   loading =false ;
-  display!: string;
+  priceDisplay!: string;
+  priceSellingDisplay!: string;
   constant = Consts;
+
   constructor(private formBuilder: FormBuilder,
     private service: ProductService,
     private router: Router,
@@ -25,7 +27,7 @@ export class AddProductComponent implements OnInit {
   ngOnInit(): void {
     this.addProductForm = this.formBuilder.group({
       productname: ['', Validators.required],
-      totalproduct: ['', Validators.required],
+      totalproduct: [0, Validators.required],
       productkey: ['', Validators.required],
       description: [''],
       sellingprice:['', Validators.required],
@@ -47,9 +49,14 @@ export class AddProductComponent implements OnInit {
     return true;
 
   }
-  eventNumberChange(event:any) {
+  eventPriceChange(event:any) {
     if (event) {
-        this.display = this.format_number(event);
+      this.priceDisplay = this.format_number(event);
+    }
+  }
+  eventSellingPriceChange(event:any) {
+    if (event) {
+        this.priceSellingDisplay = this.format_number(event);
     }
   }
   format_number(number: string, ...prefix: any) {
@@ -72,6 +79,11 @@ export class AddProductComponent implements OnInit {
   
   onSubmitCreateProduct() {
     this.submitted = true;
+    let price =  this.convertPriceStringToNumber(this.f.price.value);
+    let sellingPrice = this.convertPriceStringToNumber(this.f.sellingprice.value);
+
+    this.checkMaxPrice(price);
+    this.checkMaxSellingPrice(sellingPrice);
     if (!this.addProductForm.valid) {
       return;      
     }
@@ -79,8 +91,8 @@ export class AddProductComponent implements OnInit {
     const newProduct: NewProduct = {
       key: this.f.productkey.value,
       name: this.f.productname.value,
-      price: this.f.price.value,
-      sellingPrice: this.f.sellingprice.value,
+      price: price,
+      sellingPrice: sellingPrice,
       number: this.f.totalproduct.value,
       description: this.f.description.value,
       category: this.f.category.value
@@ -94,8 +106,33 @@ export class AddProductComponent implements OnInit {
       this.spinnerToast.showError("Error", "");
     })
     this.loading = false;
-
   }
+  checkMaxSellingPrice(price: number):boolean {
+    if (price > 100000000000000) {
+      this.f.sellingprice.setErrors({maxPriceError:true})
+      return true;
+    }
+    return false;
+  }
+  checkMaxPrice(price: number):boolean {
+    if (price > 100000000000000) {
+      this.f.price.setErrors({maxPriceError:true})
+      return true;
+    }
+    return false;
+  }
+
+  convertPriceStringToNumber(price: string): number {
+    if (price === undefined) {
+      return 0;
+    }
+    price = price.replace(/,/g, "");
+    if (isNaN(Number(price))) {
+      return 0;
+    }
+    return Number(price);
+  }
+
   onCancelCreateProduct() {
     if (confirm(Consts.ConfirmCancel)) {
       this.router.navigate([RouteTitleNavigationVi.TitleManageProduct]);

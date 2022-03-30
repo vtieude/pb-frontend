@@ -225,7 +225,7 @@ export class Consts {
     public static ManageAddProduct =  "Tạo mới sản phẩm";
     public static ManageProfile =  "Quản lí cá nhân";
     public static ManageSale =  "Quản lí bán hàng";
-    public static ConfirmCancel = "Bạn muốn huỷ?"
+    public static ConfirmCancel = "Bạn muốn huỷ?";
     
 }
 
@@ -280,7 +280,9 @@ export class TitleManagerProduct {
   public TitleProductFieldRequiredErr = "Yêu cầu nhập";
   public TitleProductSellingPrice: string = "Giá bán ra (VND)";
   public TitleProductDescription: string = "Mô tả";
-  public TitleTotalProduct: string = "Số lượng sản phẩm"
+  public TitleTotalProduct: string = "Số lượng sản phẩm";
+  public TitleMinProductPrice: string = "Nhập giá lớn hơn 0 VND";
+  public TitleMaxProductPrice: string = "Nhập giá bé hơn 100 000 000 000 000 VND";
   public TitleTableColumnsListProduct: string[] = [ "Tên sản phẩm",
   "Lọai sản phẩm",
   "Nhà cung cấp",
@@ -385,6 +387,12 @@ export class GraphqlQuery{
     createNewProduct(input: $input) {
       id
     }
+  }
+`;
+
+public static ProductMutationDeleteProduct: DocumentNode = gql`
+  mutation deleteProduct($productId: Int!) {
+    deleteProduct(productId: $productId)
   }
 `;
 

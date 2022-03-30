@@ -27,6 +27,7 @@ import { ListProductComponent } from './manage-product/list-product/list-product
 import { AddProductComponent } from './manage-product/addProduct/add-product/add-product.component';
 import { ProfileComponent } from './profile/profile/profile.component';
 import { ManageSaleComponent } from './manage-sale/manage-sale/manage-sale.component';
+import { EditProductComponent } from './manage-product/edit-product/edit-product.component';
 
 @NgModule({
   imports: [
@@ -57,7 +58,8 @@ import { ManageSaleComponent } from './manage-sale/manage-sale/manage-sale.compo
     ListProductComponent,
     AddProductComponent,
     ProfileComponent,
-    ManageSaleComponent
+    ManageSaleComponent,
+    EditProductComponent
   ]
 })
 export class ComponentsModule {}
