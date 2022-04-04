@@ -15,17 +15,6 @@ export interface EditUserModel {
   password?: string | null;
 }
 
-export interface NewProduct {
-  name: string;
-  key: string;
-  category?: string | null;
-  price: number;
-  sellingPrice: number;
-  number: number;
-  description?: string | null;
-  imageURL?: string | null;
-}
-
 export interface NewUser {
   userName: string;
   email: string;
@@ -43,6 +32,18 @@ export interface Pagination {
   PerPage?: number | null;
   Page?: number | null;
   Sort?: string[] | null;
+}
+
+export interface ProductInputModel {
+  id?: number | null;
+  name: string;
+  key: string;
+  category?: string | null;
+  price: number;
+  sellingPrice: number;
+  number: number;
+  description?: string | null;
+  imageURL?: string | null;
 }
 
 //==============================================================

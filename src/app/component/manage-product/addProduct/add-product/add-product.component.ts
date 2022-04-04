@@ -3,8 +3,8 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { Router } from '@angular/router';
 import { Consts, RouteTitleNavigationVi, TitleManagerProduct } from 'src/app/shared/consts';
 import { ProductService } from 'src/app/services/product-service/product.service';
-import { NewProduct } from '__generated__/globalTypes';
 import { SpinnerService } from 'src/app/shared/spinner.service';
+import { ProductInputModel } from '__generated__/globalTypes';
 @Component({
   selector: 'app-add-product',
   templateUrl: './add-product.component.html',
@@ -51,12 +51,12 @@ export class AddProductComponent implements OnInit {
   }
   eventPriceChange(event:any) {
     if (event) {
-      this.priceDisplay = this.format_number(event);
+      this.priceDisplay = this.format_number(event.toString());
     }
   }
   eventSellingPriceChange(event:any) {
     if (event) {
-        this.priceSellingDisplay = this.format_number(event);
+        this.priceSellingDisplay = this.format_number(event.toString());
     }
   }
   format_number(number: string, ...prefix: any) {
@@ -88,7 +88,7 @@ export class AddProductComponent implements OnInit {
       return;      
     }
     this.loading = true;
-    const newProduct: NewProduct = {
+    const newProduct: ProductInputModel = {
       key: this.f.productkey.value,
       name: this.f.productname.value,
       price: price,
@@ -97,11 +97,11 @@ export class AddProductComponent implements OnInit {
       description: this.f.description.value,
       category: this.f.category.value
     }
-    this.service.createProduct(newProduct).subscribe(({data}) => {
+    this.service.createProduct(newProduct).subscribe(() => {
       this.loading = false;
       this.spinnerToast.showToastSuccess("", Consts.TitleSuccess);
       this.router.navigate([RouteTitleNavigationVi.TitleManageProduct]);
-    }, (err) => {
+    }, () => {
       this.loading = false;
       this.spinnerToast.showError("Error", "");
     })

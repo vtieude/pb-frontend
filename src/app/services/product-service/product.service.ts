@@ -4,8 +4,10 @@ import { ProductDto } from 'src/app/model/model';
 import { GraphqlQuery } from 'src/app/shared/consts';
 import { createProductVariables } from 'src/app/shared/__generated__/createProduct';
 import { deleteProductVariables } from 'src/app/shared/__generated__/deleteProduct';
+import { editProductVariables } from 'src/app/shared/__generated__/editProduct';
+import { getProductDetail, getProductDetailVariables, getProductDetail_GetProductDetail } from 'src/app/shared/__generated__/getProductDetail';
 import { getProducts } from 'src/app/shared/__generated__/getProducts';
-import { NewProduct } from '__generated__/globalTypes';
+import { ProductInputModel } from '__generated__/globalTypes';
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +34,7 @@ export class ProductService {
     });
   }
 
-  createProduct(input : NewProduct) {
+  createProduct(input : ProductInputModel) {
     const letVariable: createProductVariables  = {
       input : input
     }
@@ -43,4 +45,28 @@ export class ProductService {
       refetchQueries:[{query: GraphqlQuery.ProductQueryGetAllProducts}]
     });
   }
+  getProductDetail(id: number) {
+    const variab : getProductDetailVariables = {
+      id : id
+    }
+    return this.apollo.watchQuery<getProductDetail>({
+      query: GraphqlQuery.ProductQueryGetProductDetail,
+      variables: variab,
+      // pollInterval: 1000,
+      fetchPolicy: 'no-cache'
+    }).valueChanges;
+  }
+
+
+  editProduct(productEdit: ProductInputModel) {
+    let variab: editProductVariables = {
+      product: productEdit
+    }
+    return this.apollo.mutate<boolean>({
+      mutation: GraphqlQuery.ProductMutationEditProduct,
+      variables: variab,
+      refetchQueries:[{query: GraphqlQuery.ProductQueryGetAllProducts}]
+    })
+  }
+
 }

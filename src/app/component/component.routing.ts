@@ -21,6 +21,7 @@ import { ListProductComponent } from './manage-product/list-product/list-product
 import { AddProductComponent } from './manage-product/addProduct/add-product/add-product.component';
 import { ProfileComponent } from './profile/profile/profile.component';
 import { ManageSaleComponent } from './manage-sale/manage-sale/manage-sale.component';
+import { EditProductComponent } from './manage-product/edit-product/edit-product.component';
 
 export const ComponentsRoutes: Routes = [
   {
@@ -71,6 +72,18 @@ export const ComponentsRoutes: Routes = [
             { title: 'Dashboard', url: '/dashboard' },
             { title: 'ngComponent' },
             { title: Consts.ManageProduct }
+          ]
+        }
+      },
+      {
+        path: RouteTitleNavigationVi.TitleEditProduct + "/:id",
+        component: EditProductComponent,
+        data: {
+          title: Consts.ManageEditProduct,
+          urls: [
+            { title: 'Dashboard', url: '/dashboard' },
+            { title: 'ngComponent' },
+            { title: Consts.ManageEditProduct }
           ]
         }
       },

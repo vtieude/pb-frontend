@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ProductDto } from 'src/app/model/model';
 import { ProductService } from 'src/app/services/product-service/product.service';
 import { Consts, RouteTitleNavigationVi, TitleManagerProduct } from 'src/app/shared/consts';
@@ -12,8 +13,9 @@ import { SpinnerService } from 'src/app/shared/spinner.service';
 export class ListProductComponent implements OnInit {
   productTitle = new TitleManagerProduct;
   listProductsInformation: ProductDto[] = [];
-  addNewProductUtl = RouteTitleNavigationVi.TitleManageAddProduct
-  constructor(private productService: ProductService, private spinnerToast: SpinnerService) { }
+  addNewProductUrl = RouteTitleNavigationVi.TitleManageAddProduct
+  constructor(private productService: ProductService, private spinnerToast: SpinnerService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.getAllProductForAdmin();
@@ -33,7 +35,7 @@ export class ListProductComponent implements OnInit {
     });
   }
   editProduct(editProduct: ProductDto) {
-
+    this.router.navigate([RouteTitleNavigationVi.TitleManageEditProduct, editProduct.id])
   }
   deleteProduct(product: ProductDto, ) {
     if(confirm("Are you sure to delete "+ product.name)) {

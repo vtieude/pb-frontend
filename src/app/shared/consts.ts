@@ -7,10 +7,12 @@ export class RouteTitleNavigationVi {
   public static TitleStaff: string = "nhan-vien";
   public static TitleProduct: string = "san-pham";
   public static TitleAddProduct: string = "tao-moi-san-pham";
+  public static TitleEditProduct: string = "sua-san-pham";
   public static TitleProfile: string = "thong-tin-ca-nhan";
   public static TitleSale: string = "ban-hang";
   public static TitleManageSale: string = "/" + RouteTitleNavigationVi.TitleManage + "/" + RouteTitleNavigationVi.TitleSale;
   public static TitleManageProfile: string = "/" + RouteTitleNavigationVi.TitleManage + "/" + RouteTitleNavigationVi.TitleProfile;
+  public static TitleManageEditProduct: string = "/" + RouteTitleNavigationVi.TitleManage + "/" + RouteTitleNavigationVi.TitleEditProduct;
   public static TitleManageUser: string = "/" + RouteTitleNavigationVi.TitleManage + "/" + RouteTitleNavigationVi.TitleStaff;
   public static TitleManageProduct: string = "/" + RouteTitleNavigationVi.TitleManage + "/" + RouteTitleNavigationVi.TitleProduct;
   public static TitleManageAddProduct: string = "/" + RouteTitleNavigationVi.TitleManage + "/" + RouteTitleNavigationVi.TitleAddProduct;
@@ -223,6 +225,7 @@ export class Consts {
     public static ManageUser =  "Quản lí nhân viên";
     public static ManageProduct =  "Quản lí sản phẩm";
     public static ManageAddProduct =  "Tạo mới sản phẩm";
+    public static ManageEditProduct =  "Thay đổi sản phẩm";
     public static ManageProfile =  "Quản lí cá nhân";
     public static ManageSale =  "Quản lí bán hàng";
     public static ConfirmCancel = "Bạn muốn huỷ?";
@@ -383,7 +386,7 @@ export class GraphqlQuery{
     }
   }`;
   public static ProductMutationCreateNew: DocumentNode = gql`
-  mutation createProduct($input:  NewProduct!) {
+  mutation createProduct($input:  ProductInputModel!) {
     createNewProduct(input: $input) {
       id
     }
@@ -395,5 +398,25 @@ public static ProductMutationDeleteProduct: DocumentNode = gql`
     deleteProduct(productId: $productId)
   }
 `;
+
+public static ProductMutationEditProduct: DocumentNode = gql`
+  mutation editProduct($product: ProductInputModel!) {
+    editProduct(input: $product)
+  }
+`;
+
+public static ProductQueryGetProductDetail = gql`
+query getProductDetail($id: Int!) {
+  GetProductDetail(id: $id){
+    id
+    name
+    category
+    price
+    sellingPrice
+    number
+    description
+    productKey
+  }
+}`;
 
 }

@@ -6,18 +6,13 @@
 import { ProductInputModel } from "./../../../../__generated__/globalTypes";
 
 // ====================================================
-// GraphQL mutation operation: createProduct
+// GraphQL mutation operation: editProduct
 // ====================================================
 
-export interface createProduct_createNewProduct {
-  __typename: "ProductDto";
-  id: number;
+export interface editProduct {
+  editProduct: boolean;
 }
 
-export interface createProduct {
-  createNewProduct: createProduct_createNewProduct;
-}
-
-export interface createProductVariables {
-  input: ProductInputModel;
+export interface editProductVariables {
+  product: ProductInputModel;
 }
