@@ -46,6 +46,11 @@ export interface ProductInputModel {
   imageURL?: string | null;
 }
 
+export interface ProfileImage {
+  fileName?: string | null;
+  file?: any | null;
+}
+
 //==============================================================
 // END Enums and Input Objects
 //==============================================================

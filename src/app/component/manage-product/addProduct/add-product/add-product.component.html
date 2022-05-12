@@ -77,6 +77,13 @@
                     <div *ngIf="f.totalproduct.errors.required">{{productTitle.TitleProductFieldRequiredErr}}</div>
                 </div>
               </div>
+              <div class="col-lg-6 col-md-6">
+                <input #fileInput type="file" (change)="uploadFile($event)">
+                <img/>
+                <div *ngIf="submitted && f.totalproduct.errors" class="invalid-feedback">
+                    <div *ngIf="f.totalproduct.errors.required">{{productTitle.TitleProductFieldRequiredErr}}</div>
+                </div>
+              </div>
             </div>
           </div>
           <div class="row button-group button-confirm-form">

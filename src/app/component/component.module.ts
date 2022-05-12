@@ -28,6 +28,7 @@ import { AddProductComponent } from './manage-product/addProduct/add-product/add
 import { ProfileComponent } from './profile/profile/profile.component';
 import { ManageSaleComponent } from './manage-sale/manage-sale/manage-sale.component';
 import { EditProductComponent } from './manage-product/edit-product/edit-product.component';
+import { SalingProductComponent } from './manage-sale/sale/saling-product/saling-product.component';
 
 @NgModule({
   imports: [
@@ -59,7 +60,8 @@ import { EditProductComponent } from './manage-product/edit-product/edit-product
     AddProductComponent,
     ProfileComponent,
     ManageSaleComponent,
-    EditProductComponent
+    EditProductComponent,
+    SalingProductComponent
   ]
 })
 export class ComponentsModule {}

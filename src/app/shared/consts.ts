@@ -382,6 +382,7 @@ export class GraphqlQuery{
       price
       sellingPrice
       number
+      description
       
     }
   }`;
@@ -419,4 +420,10 @@ query getProductDetail($id: Int!) {
   }
 }`;
 
+
+public static HelperMutationUploadFile: DocumentNode = gql`
+  mutation uploadFile($file: ProfileImage!) {
+    uploadFile(input: $file) 
+  }
+`;
 }

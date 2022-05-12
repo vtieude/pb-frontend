@@ -7,7 +7,8 @@ import { deleteUserVariables } from 'src/app/shared/__generated__/deleteUser';
 import { editUserVariables } from 'src/app/shared/__generated__/editUser';
 import { getAllUsers } from 'src/app/shared/__generated__/getAllUsers';
 import { getProfile } from 'src/app/shared/__generated__/getProfile';
-import { EditUserModel, NewUser } from '__generated__/globalTypes';
+import { uploadFile, uploadFileVariables } from 'src/app/shared/__generated__/uploadFile';
+import { EditUserModel, NewUser, ProfileImage } from '__generated__/globalTypes';
 
 @Injectable({
   providedIn: 'root'
@@ -66,6 +67,18 @@ export class UserService {
       mutation: GraphqlQuery.UserNewUserMutation,
       variables: variable,
       refetchQueries:[{query: GraphqlQuery.UserQueryGetAllUser}]
+    });
+  }
+
+  uploadImage(input: ProfileImage) {
+    const letVariable:uploadFileVariables  = {
+      file : input
+    }
+    console.log(letVariable)
+    return this.apollo.mutate<string>({
+      mutation: GraphqlQuery.HelperMutationUploadFile,
+      variables: input
+      // pollInterval: 1000,
     });
   }
 }

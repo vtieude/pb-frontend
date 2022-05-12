@@ -4,7 +4,8 @@ import { Router } from '@angular/router';
 import { Consts, RouteTitleNavigationVi, TitleManagerProduct } from 'src/app/shared/consts';
 import { ProductService } from 'src/app/services/product-service/product.service';
 import { SpinnerService } from 'src/app/shared/spinner.service';
-import { ProductInputModel } from '__generated__/globalTypes';
+import { ProductInputModel, ProfileImage } from '__generated__/globalTypes';
+import { UserService } from 'src/app/services/user-service/user-service.service';
 @Component({
   selector: 'app-add-product',
   templateUrl: './add-product.component.html',
@@ -21,6 +22,7 @@ export class AddProductComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
     private service: ProductService,
+    private userService: UserService,
     private router: Router,
     private spinnerToast: SpinnerService) { }
 
@@ -136,6 +138,20 @@ export class AddProductComponent implements OnInit {
   onCancelCreateProduct() {
     if (confirm(Consts.ConfirmCancel)) {
       this.router.navigate([RouteTitleNavigationVi.TitleManageProduct]);
+    }
+  }
+  uploadFile(event: any) {
+    const file:File = event.target.files[0];
+        if (file) {
+          let profile: ProfileImage = {
+            file: file
+          }
+        this.userService.uploadImage(profile).subscribe(({data}) => {
+          this.loading = false;
+        }, (err) => {
+          this.loading = false;
+          this.spinnerToast.showError("Error", err);
+        });
     }
   }
 }

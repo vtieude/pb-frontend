@@ -15,6 +15,7 @@ export interface getProducts_GetAllProducts {
   price: number;
   sellingPrice: number;
   number: number;
+  description: string | null;
 }
 
 export interface getProducts {
