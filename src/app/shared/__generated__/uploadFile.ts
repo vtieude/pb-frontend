@@ -14,5 +14,5 @@ export interface uploadFile {
 }
 
 export interface uploadFileVariables {
-  file: ProfileImage;
+  image: ProfileImage;
 }

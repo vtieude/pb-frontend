@@ -71,10 +71,10 @@ export class UserService {
   }
 
   uploadImage(input: ProfileImage) {
-    const letVariable:uploadFileVariables  = {
-      file : input
-    }
-    console.log(letVariable)
+    // const letVariable:uploadFileVariables  = {
+      
+    // }
+    // console.log(letVariable)
     return this.apollo.mutate<string>({
       mutation: GraphqlQuery.HelperMutationUploadFile,
       variables: input

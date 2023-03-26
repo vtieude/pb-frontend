@@ -853,7 +853,19 @@
             "deprecationReason": null
           },
           {
-            "name": "imageURL",
+            "name": "imagePrefix",
+            "description": "",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "imageBase64",
             "description": "",
             "args": [],
             "type": {
@@ -994,7 +1006,19 @@
             "deprecationReason": null
           },
           {
-            "name": "imageURL",
+            "name": "imageBase64",
+            "description": "",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "imagePrefix",
             "description": "",
             "type": {
               "kind": "SCALAR",
@@ -1030,11 +1054,11 @@
             "deprecationReason": null
           },
           {
-            "name": "file",
+            "name": "fileBase64",
             "description": "",
             "type": {
               "kind": "SCALAR",
-              "name": "Upload",
+              "name": "String",
               "ofType": null
             },
             "defaultValue": null,
@@ -1261,17 +1285,6 @@
         "kind": "SCALAR",
         "name": "Time",
         "description": "DateTime in ISO8601, e.g. 2006-01-31T15:04:05-07:00",
-        "specifiedByUrl": null,
-        "fields": null,
-        "inputFields": null,
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "SCALAR",
-        "name": "Upload",
-        "description": "",
         "specifiedByUrl": null,
         "fields": null,
         "inputFields": null,
