@@ -6,6 +6,7 @@ import { ProductService } from 'src/app/services/product-service/product.service
 import { SpinnerService } from 'src/app/shared/spinner.service';
 import { ProductInputModel, ProfileImage } from '__generated__/globalTypes';
 import { UserService } from 'src/app/services/user-service/user-service.service';
+import { of } from 'rxjs';
 @Component({
   selector: 'app-add-product',
   templateUrl: './add-product.component.html',
@@ -18,7 +19,9 @@ export class AddProductComponent implements OnInit {
   loading =false ;
   priceDisplay!: string;
   priceSellingDisplay!: string;
+  imageBase64!: string;
   constant = Consts;
+  pictureBase64!: string;
 
   constructor(private formBuilder: FormBuilder,
     private service: ProductService,
@@ -52,6 +55,7 @@ export class AddProductComponent implements OnInit {
 
   }
   eventPriceChange(event:any) {
+    var count$ = of(NaN)
     if (event) {
       this.priceDisplay = this.format_number(event.toString());
     }
@@ -97,7 +101,8 @@ export class AddProductComponent implements OnInit {
       sellingPrice: sellingPrice,
       number: this.f.totalproduct.value,
       description: this.f.description.value,
-      category: this.f.category.value
+      category: this.f.category.value,
+      imageBase64: this.imageBase64
     }
     this.service.createProduct(newProduct).subscribe(() => {
       this.loading = false;
@@ -143,15 +148,22 @@ export class AddProductComponent implements OnInit {
   uploadFile(event: any) {
     const file:File = event.target.files[0];
         if (file) {
-          let profile: ProfileImage = {
-            file: file
-          }
-        this.userService.uploadImage(profile).subscribe(({data}) => {
-          this.loading = false;
-        }, (err) => {
-          this.loading = false;
-          this.spinnerToast.showError("Error", err);
-        });
+        var self = this;
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+          // let profile: ProfileImage = {
+          //   FileBase64: reader.result as string,
+          //   FileName: "test"
+          // }
+          this.imageBase64 = reader.result as string;
+          //   this.userService.uploadImage(profile).subscribe(({data}) => {
+          //     this.loading = false;
+          //   }, (err) => {
+          //     this.loading = false;
+          //     this.spinnerToast.showError("Error", err);
+          //   });
+        };
     }
   }
 }

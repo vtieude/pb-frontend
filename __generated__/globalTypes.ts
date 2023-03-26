@@ -43,12 +43,13 @@ export interface ProductInputModel {
   sellingPrice: number;
   number: number;
   description?: string | null;
-  imageURL?: string | null;
+  imageBase64?: string | null;
+  imagePrefix?: string | null;
 }
 
 export interface ProfileImage {
   fileName?: string | null;
-  file?: any | null;
+  fileBase64?: string | null;
 }
 
 //==============================================================

@@ -5,8 +5,9 @@ import { ProductDto } from 'src/app/model/model';
 import { ProductService } from 'src/app/services/product-service/product.service';
 import { Consts, RouteTitleNavigationVi, TitleManagerProduct } from 'src/app/shared/consts';
 import { SpinnerService } from 'src/app/shared/spinner.service';
+import { getProductDetail_GetProductDetail } from 'src/app/shared/__generated__/getProductDetail';
 import { ProductInputModel } from '__generated__/globalTypes';
-
+import { DomSanitizer } from '@angular/platform-browser';
 @Component({
   selector: 'app-edit-product',
   templateUrl: './edit-product.component.html',
@@ -20,13 +21,16 @@ export class EditProductComponent implements OnInit {
   priceDisplay!: string;
   priceSellingDisplay!: string;
   id = 0;
+  imageBase64: any;
+  productDetail!: getProductDetail_GetProductDetail; 
   constant = Consts;
 
   constructor(private formBuilder: FormBuilder,
     private service: ProductService,
     private router: Router,
     private spinnerToast: SpinnerService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private _sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
     this.editProductForm = this.formBuilder.group({
@@ -36,7 +40,7 @@ export class EditProductComponent implements OnInit {
       description: [''],
       sellingPrice:['', Validators.required],
       price:['', Validators.required],
-      category:['', Validators.required]
+      category:['', Validators.required],
     });
     this.route.paramMap.subscribe((params: ParamMap) => {
       if (params.get('id')) {
@@ -50,6 +54,10 @@ export class EditProductComponent implements OnInit {
     this.service.getProductDetail(this.id).subscribe(({data}) => {
       if (data) {
         this.editProductForm.patchValue(data.GetProductDetail);
+        this.productDetail = data.GetProductDetail;
+        this.imageBase64 = this._sanitizer.bypassSecurityTrustResourceUrl((data.GetProductDetail.imagePrefix ?? "") 
+                 + data.GetProductDetail.imageBase64);
+                 console.log(this.imageBase64);
       }
     })
   }
@@ -160,6 +168,27 @@ export class EditProductComponent implements OnInit {
   onCancelEditProduct() {
     if (confirm(Consts.ConfirmCancel)) {
       this.router.navigate([RouteTitleNavigationVi.TitleManageProduct]);
+    }
+  }
+  uploadFile(event: any) {
+    const file:File = event.target.files[0];
+        if (file) {
+        var self = this;
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+          // let profile: ProfileImage = {
+          //   FileBase64: reader.result as string,
+          //   FileName: "test"
+          // }
+          this.imageBase64 = reader.result as string;
+          //   this.userService.uploadImage(profile).subscribe(({data}) => {
+          //     this.loading = false;
+          //   }, (err) => {
+          //     this.loading = false;
+          //     this.spinnerToast.showError("Error", err);
+          //   });
+        };
     }
   }
 }

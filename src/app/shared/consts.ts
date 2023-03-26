@@ -417,13 +417,15 @@ query getProductDetail($id: Int!) {
     number
     description
     productKey
+    imageBase64
+    imagePrefix
   }
 }`;
 
 
 public static HelperMutationUploadFile: DocumentNode = gql`
-  mutation uploadFile($file: ProfileImage!) {
-    uploadFile(input: $file) 
+  mutation uploadFile($image: ProfileImage!) {
+    uploadFile(input: $image) 
   }
 `;
 }
