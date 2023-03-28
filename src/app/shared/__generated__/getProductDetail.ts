@@ -17,8 +17,7 @@ export interface getProductDetail_GetProductDetail {
   number: number;
   description: string | null;
   productKey: string;
-  imageBase64: string | null;
-  imagePrefix: string | null;
+  imageUrl: string | null;
 }
 
 export interface getProductDetail {

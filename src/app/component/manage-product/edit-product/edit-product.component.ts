@@ -21,7 +21,8 @@ export class EditProductComponent implements OnInit {
   priceDisplay!: string;
   priceSellingDisplay!: string;
   id = 0;
-  imageBase64: any;
+  imageUrl: any;
+  imageBase64!: any;
   productDetail!: getProductDetail_GetProductDetail; 
   constant = Consts;
 
@@ -55,9 +56,7 @@ export class EditProductComponent implements OnInit {
       if (data) {
         this.editProductForm.patchValue(data.GetProductDetail);
         this.productDetail = data.GetProductDetail;
-        this.imageBase64 = this._sanitizer.bypassSecurityTrustResourceUrl((data.GetProductDetail.imagePrefix ?? "") 
-                 + data.GetProductDetail.imageBase64);
-                 console.log(this.imageBase64);
+        this.imageUrl = data.GetProductDetail.imageUrl;
       }
     })
   }
@@ -127,7 +126,8 @@ export class EditProductComponent implements OnInit {
       sellingPrice: sellingPrice,
       number: this.f.number.value,
       description: this.f.description.value,
-      category: this.f.category.value
+      category: this.f.category.value,
+      imageBase64: this.imageBase64
     }
     this.service.editProduct(newProduct).subscribe(() => {
       this.loading = false;
@@ -181,6 +181,7 @@ export class EditProductComponent implements OnInit {
           //   FileBase64: reader.result as string,
           //   FileName: "test"
           // }
+          this.imageUrl = reader.result as string;
           this.imageBase64 = reader.result as string;
           //   this.userService.uploadImage(profile).subscribe(({data}) => {
           //     this.loading = false;

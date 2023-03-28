@@ -417,8 +417,7 @@ query getProductDetail($id: Int!) {
     number
     description
     productKey
-    imageBase64
-    imagePrefix
+    imageUrl
   }
 }`;
 
