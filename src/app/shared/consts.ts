@@ -383,7 +383,7 @@ export class GraphqlQuery{
       sellingPrice
       number
       description
-      
+      imageUrl
     }
   }`;
   public static ProductMutationCreateNew: DocumentNode = gql`

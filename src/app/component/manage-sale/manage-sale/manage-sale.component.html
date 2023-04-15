@@ -7,7 +7,7 @@
             <div *ngFor='let ts of listProductsInformation'  class="col-lg-3 col-md-6 product-item">
                 <!-- Card -->
                 <div class="card">
-                    <img class="card-img-top img-responsive" src="assets/images/big/img1.jpg" alt="Card image cap">
+                    <img class="card-img-top img-responsive" src={{ts.imageUrl}} width="300" height="300" alt="Card image cap">
                     <div class="card-body">
                         <h4 class="card-title">{{ts.name}}</h4>
                         <p class="card-text" [ngbTooltip]="ts.description">{{ts.description}}</p>
