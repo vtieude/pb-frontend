@@ -1,0 +1,108 @@
+<div class="card">
+    <div class="card-body">
+      <form [formGroup]="editProductForm" (submit)="onSubmitEditProduct()">
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-6 col-md-6">
+                <label class="control-label required-field" for="productname">{{productTitle.TitleProductProductName}}</label>
+                <input type="text" formControlName="name" class="form-control" 
+                [ngClass]="{ 'is-invalid': submitted && f.name.errors }"/>
+                <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                    <div *ngIf="f.name.errors.required">{{productTitle.TitleProductFieldRequiredErr}}</div>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6">
+                <label for="productKey" class="control-label required-field">{{productTitle.TitleProductKey}}</label>
+                <input type="text" formControlName="productKey" class="form-control" 
+                [ngClass]="{ 'is-invalid': submitted && f.productKey.errors }" />
+                <div *ngIf="submitted && f.productKey.errors" class="invalid-feedback">
+                    <div *ngIf="f.productKey.errors.required">{{productTitle.TitleProductFieldRequiredErr}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-6 col-md-6">
+                <label for="category" class="control-label required-field">{{productTitle.TitleProductCategory}}</label>
+                <input type="text" formControlName="category" class="form-control" 
+                [ngClass]="{ 'is-invalid': submitted && f.category.errors }" />
+                <div *ngIf="submitted && f.category.errors" class="invalid-feedback">
+                    <div *ngIf="f.category.errors.required">{{productTitle.TitleProductFieldRequiredErr}}</div>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6">
+                <label class="control-label required-field" for="price">{{productTitle.TitleProductDescription}}</label>
+                <input type="text" formControlName="description" class="form-control" 
+                [ngClass]="{ 'is-invalid': submitted && f.description.errors }"/>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-6 col-md-6">
+                <label class="control-label required-field" for="price">{{productTitle.TitleProductPrice}}</label>
+                <input type="text" (keypress)="numberOnly($event)"  formControlName="price"  
+                [(ngModel)]="priceDisplay" (ngModelChange)="eventPriceChange($event)" class="form-control" 
+                [ngClass]="{ 'is-invalid': submitted && f.price.errors }"/>
+                <div *ngIf="submitted && f.price.errors" class="invalid-feedback">
+                    <div *ngIf="f.price.errors.required">{{productTitle.TitleProductFieldRequiredErr}}</div>
+                </div>
+                <div *ngIf="submitted && f.price.errors" class="invalid-feedback">
+                  <div *ngIf="f.price.errors.maxPriceError">{{productTitle.TitleMaxProductPrice}}</div>
+              </div>
+              </div>
+              <div class="col-lg-6 col-md-6">
+                <label for="category" class="control-label required-field">{{productTitle.TitleProductSellingPrice}}</label>
+                <input type="text"  (keypress)="numberOnly($event)" 
+                   formControlName="sellingPrice" class="form-control" 
+                   [(ngModel)]="priceSellingDisplay" (ngModelChange)="eventSellingPriceChange($event)"
+                [ngClass]="{ 'is-invalid': submitted && f.sellingPrice.errors }" />
+                <div *ngIf="submitted && f.sellingPrice.errors" class="invalid-feedback">
+                    <div *ngIf="f.sellingPrice.errors.required">{{productTitle.TitleProductFieldRequiredErr}}</div>
+                </div>
+                <div *ngIf="submitted && f.sellingPrice.errors" class="invalid-feedback">
+                  <div *ngIf="f.sellingPrice.errors.maxPriceError">{{productTitle.TitleMaxProductPrice}}</div>
+              </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-6 col-md-6">
+                <label for="category" class="control-label required-field">{{productTitle.TitleTotalProduct}}</label>
+                <input type="number" formControlName="number" class="form-control" 
+                [ngClass]="{ 'is-invalid': submitted && f.number.errors }" />
+                <div *ngIf="submitted && f.number.errors" class="invalid-feedback">
+                    <div *ngIf="f.number.errors.required">{{productTitle.TitleProductFieldRequiredErr}}</div>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6">
+                <input #fileInput type="file"  (change)="uploadFile($event)"  accept=".png, .jpg, .jpeg, .pdf">
+                <img *ngIf="this.imageUrl" style="max-width: 100%; height: 200px;" [src]=this.imageUrl>
+                <div *ngIf="submitted && f.totalproduct.errors" class="invalid-feedback">
+                    <div *ngIf="f.totalproduct.errors.required">{{productTitle.TitleProductFieldRequiredErr}}</div>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+          <div class="row button-group button-confirm-form">
+            <div class="col-lg-2 col-md-4 ">
+                <button [disabled]="loading" type="button" (click)="onCancelEditProduct()"  
+                    class="btn btn-rounded btn-block btn-outline-secondary">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    {{constant.TitleCancel}}
+                </button>
+            </div>
+            <div class="col-lg-2 col-md-4">
+                <button [disabled]="loading" type="button" (click)="onSubmitEditProduct()" 
+                 class="btn btn-rounded btn-block btn-outline-primary">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    {{constant.TitleEdit}}
+                </button>
+            </div>
+        </div>
+      </form>
+  </div>
+</div>

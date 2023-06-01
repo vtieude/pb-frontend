@@ -21,6 +21,14 @@ import { NgbdtypeheadBasicComponent } from './typehead/typehead.component';
 import { ButtonsComponent } from './buttons/buttons.component';
 import { CardsComponent } from './card/card.component';
 import { RouterModule } from '@angular/router';
+import { ListUserComponent } from './manage-user/list-user/list-user.component';
+import { PipesModule } from '../shared/pipe/pipes.module';
+import { ListProductComponent } from './manage-product/list-product/list-product.component';
+import { AddProductComponent } from './manage-product/addProduct/add-product/add-product.component';
+import { ProfileComponent } from './profile/profile/profile.component';
+import { ManageSaleComponent } from './manage-sale/manage-sale/manage-sale.component';
+import { EditProductComponent } from './manage-product/edit-product/edit-product.component';
+import { SalingProductComponent } from './manage-sale/sale/saling-product/saling-product.component';
 
 @NgModule({
   imports: [
@@ -28,7 +36,8 @@ import { RouterModule } from '@angular/router';
     RouterModule.forChild(ComponentsRoutes),
     FormsModule,
     ReactiveFormsModule,
-    NgbModule
+    NgbModule,
+    PipesModule
   ],
   declarations: [
     NgbdpregressbarBasicComponent,
@@ -45,7 +54,14 @@ import { RouterModule } from '@angular/router';
     NgbdtimepickerBasicComponent,
     NgbdtypeheadBasicComponent,
     ButtonsComponent,
-    CardsComponent
+    CardsComponent,
+    ListUserComponent,
+    ListProductComponent,
+    AddProductComponent,
+    ProfileComponent,
+    ManageSaleComponent,
+    EditProductComponent,
+    SalingProductComponent
   ]
 })
 export class ComponentsModule {}

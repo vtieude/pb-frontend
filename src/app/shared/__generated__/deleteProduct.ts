@@ -4,14 +4,13 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: characters
+// GraphQL mutation operation: deleteProduct
 // ====================================================
 
-export interface characters_GetAllUsers {
-  __typename: "User";
-  id: string;
+export interface deleteProduct {
+  deleteProduct: boolean;
 }
 
-export interface characters {
-  GetAllUsers: characters_GetAllUsers[];
+export interface deleteProductVariables {
+  productId: number;
 }

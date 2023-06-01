@@ -15,11 +15,91 @@ import { NgbdtimepickerBasicComponent } from './timepicker/timepicker.component'
 import { NgbdtypeheadBasicComponent } from './typehead/typehead.component';
 import { ButtonsComponent } from './buttons/buttons.component';
 import { CardsComponent } from './card/card.component';
+import { ListUserComponent } from './manage-user/list-user/list-user.component';
+import { Consts, RouteTitleNavigationVi } from '../shared/consts';
+import { ListProductComponent } from './manage-product/list-product/list-product.component';
+import { AddProductComponent } from './manage-product/addProduct/add-product/add-product.component';
+import { ProfileComponent } from './profile/profile/profile.component';
+import { ManageSaleComponent } from './manage-sale/manage-sale/manage-sale.component';
+import { EditProductComponent } from './manage-product/edit-product/edit-product.component';
 
 export const ComponentsRoutes: Routes = [
   {
     path: '',
     children: [
+      {
+        path: RouteTitleNavigationVi.TitleProfile,
+        component: ProfileComponent,
+        data: {
+          title: Consts.ManageProfile,
+          urls: [
+            { title: 'Dashboard', url: '/dashboard' },
+            { title: 'ngComponent' },
+            { title: Consts.ManageProfile }
+          ]
+        }
+      },
+      {
+        path: RouteTitleNavigationVi.TitleSale,
+        component: ManageSaleComponent,
+        data: {
+          title: Consts.ManageSale,
+          urls: [
+            { title: 'Dashboard', url: '/dashboard' },
+            { title: 'ngComponent' },
+            { title: Consts.ManageSale }
+          ]
+        }
+      },
+      {
+        path: RouteTitleNavigationVi.TitleStaff,
+        component: ListUserComponent,
+        data: {
+          title: Consts.ManageUser,
+          urls: [
+            { title: 'Dashboard', url: '/dashboard' },
+            { title: 'ngComponent' },
+            { title: Consts.ManageUser }
+          ]
+        }
+      },
+      {
+        path: RouteTitleNavigationVi.TitleProduct,
+        component: ListProductComponent,
+        data: {
+          title: Consts.ManageProduct,
+          urls: [
+            { title: 'Dashboard', url: '/dashboard' },
+            { title: 'ngComponent' },
+            { title: Consts.ManageProduct }
+          ]
+        }
+      },
+      {
+        path: RouteTitleNavigationVi.TitleEditProduct + "/:id",
+        component: EditProductComponent,
+        data: {
+          title: Consts.ManageEditProduct,
+          urls: [
+            { title: 'Dashboard', url: '/dashboard' },
+            { title: 'ngComponent' },
+            { title: Consts.ManageEditProduct }
+          ]
+        }
+      },
+      {
+        path: RouteTitleNavigationVi.TitleAddProduct,
+        component: AddProductComponent,
+        data: {
+          title: Consts.ManageAddProduct,
+          urls: [
+            { title: 'Dashboard', url: '/dashboard' },
+            { title: 'ngComponent' },
+            { title: Consts.ManageAddProduct }
+          ]
+        }
+      },
+      //Todo Unused Component
       {
         path: 'progressbar',
         component: NgbdpregressbarBasicComponent,

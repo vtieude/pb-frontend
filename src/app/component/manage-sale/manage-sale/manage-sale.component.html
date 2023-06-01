@@ -1,0 +1,24 @@
+<div class="row">
+    <div class="col-12">
+        <h4 class="d-inline">Danh sách sản phẩm</h4>
+        <!-- Row -->
+        <div class="row">
+            <!-- column -->
+            <div *ngFor='let ts of listProductsInformation'  class="col-lg-3 col-md-6 product-item">
+                <!-- Card -->
+                <div class="card">
+                    <img class="card-img-top img-responsive" src={{ts.imageUrl}} width="300" height="300" alt="Card image cap">
+                    <div class="card-body">
+                        <h4 class="card-title">{{ts.name}}</h4>
+                        <p class="card-text" [ngbTooltip]="ts.description">{{ts.description}}</p>
+                        <p>{{ts.sellingPrice | number:'.0-0'}} VND</p>
+                        <a href="#" class="btn btn-primary">Bán sản phẩm này</a>
+                    </div>
+                </div>
+                <!-- Card -->
+            </div>
+        </div>
+        <!-- Row -->
+    </div>
+</div>
+<!-- End Row -->
